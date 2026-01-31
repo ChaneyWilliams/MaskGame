@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameState currentGameState;
+    public GameObject pauseMenuUI;
+    public bool GameIsPaused = false;
 
     void Awake()
     {
@@ -37,6 +39,23 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        GameIsPaused = false;
+        Time.timeScale = 1.0f;
+    }
+    public void Paused()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0.0f;
+        GameIsPaused = true;
+    }
+
+    public void Quite()
+    {
+        Application.Quit();
+    }
 
     public void ThisIsDumb()
     {

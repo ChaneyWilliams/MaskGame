@@ -51,4 +51,16 @@ public class Player : MonoBehaviour
         GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
     }
 
+    public void PauseGame(InputAction.CallbackContext context)
+    {
+        if (GameManager.instance.GameIsPaused)
+        {
+            GameManager.instance.Resume();
+        }
+        else
+        {
+            GameManager.instance.Paused();
+        }
+    }
+
 }
