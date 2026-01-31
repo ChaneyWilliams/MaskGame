@@ -22,7 +22,6 @@ public class EnemyManager : MonoBehaviour
         {
             enemy.StartMove();
         }
-        GameManager.instance.ChangeGameState(GameManager.GameState.playerTurn);
     }
 
 }

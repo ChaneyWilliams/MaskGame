@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameState currentGameState;
+    public GameObject pauseMenuUI;
+    public bool GameIsPaused = false;
 
     void Awake()
     {
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState newGameState)
     {
         currentGameState = newGameState;
+        Debug.Log(currentGameState);
 
         switch (currentGameState)
         {
@@ -29,23 +32,44 @@ public class GameManager : MonoBehaviour
 
             case GameState.enemyTurn:
                 //Debug.Log("enemy moving");
-                Invoke(nameof(ThisIsDumb), 5.0f);
-                EnemyManager.instance.TakeTurn();
+                Invoke(nameof(EnemyTurn), 1.0f);;
+                ChangeGameState(GameState.playerTurn);
                 //Debug.Log("enemy done");
                 break;
         }
     }
 
 
-
-    public void ThisIsDumb()
-    {
-        Debug.Log("oh my god");
-    }
-
     public enum GameState
     {
         playerTurn = 0,
         enemyTurn = 1
+    }
+
+    void EnemyTurn()
+    {
+        EnemyManager.instance.TakeTurn();
+    }
+
+
+/// <summary>
+/// PauseMenu Stuff
+/// </summary>
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        GameIsPaused = false;
+        Time.timeScale = 1.0f;
+    }
+    public void Paused()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0.0f;
+        GameIsPaused = true;
+    }
+
+    public void Quite()
+    {
+        Application.Quit();
     }
 }
