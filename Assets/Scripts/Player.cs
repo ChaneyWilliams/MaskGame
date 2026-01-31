@@ -20,9 +20,7 @@ public class Player : MonoBehaviour
     {
         if (!isMoving) return;
 
-        rb.MovePosition(
-            Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime)
-        );
+        rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
 
         if (Vector3.Distance(rb.position, targetPosition) < 0.01f)
         {

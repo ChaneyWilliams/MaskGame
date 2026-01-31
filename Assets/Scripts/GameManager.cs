@@ -1,3 +1,4 @@
+using System.Dynamic;
 using UnityEngine;
 using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
@@ -27,9 +28,19 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.enemyTurn:
-                Debug.Log("enemyturn");
+                //Debug.Log("enemy moving");
+                Invoke(nameof(ThisIsDumb), 5.0f);
+                EnemyManager.instance.TakeTurn();
+                //Debug.Log("enemy done");
                 break;
         }
+    }
+
+
+
+    public void ThisIsDumb()
+    {
+        Debug.Log("oh my god");
     }
 
     public enum GameState
