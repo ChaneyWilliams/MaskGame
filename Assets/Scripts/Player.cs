@@ -8,32 +8,49 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float speed = 5.0f;
+    Vector3 targetPosition;
+    bool isMoving = false;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        targetPosition = transform.position;
+    }
+    void FixedUpdate()
+    {
+        if (!isMoving) return;
+
+        rb.MovePosition(
+            Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime)
+        );
+
+        if (Vector3.Distance(rb.position, targetPosition) < 0.01f)
+        {
+            rb.position = targetPosition;
+            isMoving = false;
+        }
     }
 
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            if (Mathf.Abs(context.ReadValue<Vector2>().x) == 1f)
-            {
-                Debug.Log(context.ReadValue<Vector2>().x);
-                gameObject.transform.position += new Vector3(context.ReadValue<Vector2>().x, 0f, 0f);
-            }
+        //if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn) return;
+        if (isMoving) return;
 
-            if (Mathf.Abs(context.ReadValue<Vector2>().y) == 1f)
-            {
-                gameObject.transform.position += new Vector3(0f, context.ReadValue<Vector2>().y, 0f);
-            }
-        }
-        else if (context.canceled)
+        Vector2 input = context.ReadValue<Vector2>();
+
+        if (Mathf.Abs(input.x) == 1f)
         {
-            return;
+            targetPosition = transform.position + new Vector3(input.x, 0f, 0f);
+            isMoving = true;
+        }
+        else if (Mathf.Abs(input.y) == 1f)
+        {
+            targetPosition = transform.position + new Vector3(0f, input.y, 0f);
+            isMoving = true;
         }
 
+        GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
     }
+
 }
