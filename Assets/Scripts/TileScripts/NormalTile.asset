@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d7ff217f6b80f4d87915b94e130921, type: 3}
-  m_Name: Test
+  m_Name: NormalTile
   m_EditorClassIdentifier: Assembly-CSharp::TileData
-  test: 5
+  tiles: []
+  test: 0
