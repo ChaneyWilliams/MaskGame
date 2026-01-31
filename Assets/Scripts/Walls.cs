@@ -7,7 +7,7 @@ public class Walls : MonoBehaviour
     {
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.name == "MyGameObjectName")
+            if (collision.gameObject.name == "MyGameObject")
             {
                 //If the GameObject's name matches the one you suggest, output this message in the console
                 Debug.Log("Do something here");
