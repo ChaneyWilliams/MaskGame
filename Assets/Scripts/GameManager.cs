@@ -1,6 +1,9 @@
-using System.Dynamic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Tilemaps;
+using System.Collections.Generic;
+
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +12,11 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState;
     public GameObject pauseMenuUI;
     public bool GameIsPaused = false;
+    [SerializeField] private Tilemap map;
+
+    [SerializeField] List<TileData> tileDatas;
+
+    private Dictionary<TileBase, TileData> dataFromTile;
 
     void Awake()
     {
@@ -18,6 +26,16 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
+
+        dataFromTile = new Dictionary<TileBase, TileData>();
+
+        foreach (var tileData in tileDatas)
+        {
+            foreach (var tile in tileData.tiles)
+            {
+                dataFromTile.Add(tile, tileData);
+            }
+        }
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -32,13 +50,25 @@ public class GameManager : MonoBehaviour
 
             case GameState.enemyTurn:
                 //Debug.Log("enemy moving");
-                Invoke(nameof(EnemyTurn), 1.0f);;
+                Invoke(nameof(EnemyTurn), 1.0f); ;
                 ChangeGameState(GameState.playerTurn);
                 //Debug.Log("enemy done");
                 break;
         }
     }
 
+    public int GetTileTest(Vector2 worldPos)
+    {
+        Vector3Int gridPosition = map.WorldToCell(worldPos);
+
+        TileBase tile = map.GetTile(gridPosition);
+
+        if (tile == null) return 99;
+
+        int testNum = dataFromTile[tile].test;
+
+        return testNum;
+    }
 
     public enum GameState
     {
@@ -52,9 +82,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-/// <summary>
-/// PauseMenu Stuff
-/// </summary>
+
+    /// <summary>
+    /// PauseMenu Stuff
+    /// </summary>
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
