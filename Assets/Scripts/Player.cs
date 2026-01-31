@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     public PlayerState currentPlayerState;
     public float speed = 5.0f;
-    Vector3 targetPosition;
+    public Vector3 targetPosition;
     bool isMoving = false;
 
     void Awake()
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!isMoving) return;
+        if(!isMoving) return;
 
         rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
 

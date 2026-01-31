@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach(Enemy enemy in enemies)
         {
+            UnityEngine.Debug.Log("moving enemies");
             enemy.StartMove();
         }
     }

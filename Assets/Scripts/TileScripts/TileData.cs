@@ -1,5 +1,4 @@
-using System.Numerics;
-using System.Security;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,18 +11,36 @@ public class TileData : ScriptableObject
 
     public void FireTile(GameObject go)
     {
-        UnityEngine.Debug.Log("LOL Get REKT");
+        if (go.CompareTag("Player"))
+        {
+            UnityEngine.Debug.Log("GameOver");
+        }
         Destroy(go);
     }
     public void WaterTile(GameObject go)
     {
         if (go.CompareTag("Player"))
         {
+            Player player = go.GetComponent<Player>();
+            UnityEngine.Debug.Log("moving Player down");
+            player.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
+        }
+        else if (go.CompareTag("Enemy"))
+        {
+            Enemy enemy = go.GetComponent<Enemy>();
+            enemy.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
         }
     }
     public void EarthTile(GameObject go)
     {
-        UnityEngine.Debug.Log("this is a Earth tile");
+        if(GameManager.instance.currentGameState == GameManager.GameState.playerTurn)
+        {
+            GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
+        }
+        else if(GameManager.instance.currentGameState == GameManager.GameState.enemyTurn)
+        {
+            GameManager.instance.ChangeGameState(GameManager.GameState.playerTurn);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using System.Collections;
 
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -37,23 +38,34 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+public void ChangeGameState(GameState newGameState)
+{
+    StopAllCoroutines();
+    StartCoroutine(ChangeGameStateRoutine(newGameState));
+}
 
-    public void ChangeGameState(GameState newGameState)
+private IEnumerator ChangeGameStateRoutine(GameState newGameState)
+{
+    currentGameState = newGameState;
+    Debug.Log(currentGameState);
+
+    switch (currentGameState)
     {
-        currentGameState = newGameState;
-        //Debug.Log(currentGameState);
+        case GameState.playerTurn:
+            yield break;
 
-        switch (currentGameState)
-        {
-            case GameState.playerTurn:
-                break;
+        case GameState.enemyTurn:
+            yield return new WaitForSeconds(1.0f);
 
-            case GameState.enemyTurn:
-                Invoke(nameof(EnemyTurn), 1.0f); ;
-                ChangeGameState(GameState.playerTurn);
-                break;
-        }
+            EnemyTurn();
+
+            yield return new WaitForSeconds(1.0f);
+
+            ChangeGameState(GameState.playerTurn);
+            break;
     }
+}
+
 
     public void GetTile(GameObject worldPos)
     {
@@ -64,7 +76,6 @@ public class GameManager : MonoBehaviour
         if (tile == null) return;
 
         TileData tileInfo = dataFromTile[tile];
-        Debug.Log("this is a " + tileInfo.tileName);
         if(tileInfo.tileName != "Normal")
         {
             if(tileInfo.tileName == "Fire")
