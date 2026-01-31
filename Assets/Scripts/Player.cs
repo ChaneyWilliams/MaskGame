@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public PlayerState currentPlayerState;
     public float speed = 5.0f;
     public Vector3 targetPosition;
-    bool isMoving = false;
+    public bool isMoving = false;
 
     void Awake()
     {

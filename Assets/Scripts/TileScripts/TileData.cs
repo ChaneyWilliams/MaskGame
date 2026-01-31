@@ -11,6 +11,7 @@ public class TileData : ScriptableObject
 
     public void FireTile(GameObject go)
     {
+        UnityEngine.Debug.Log("REKT");
         if (go.CompareTag("Player"))
         {
             UnityEngine.Debug.Log("GameOver");
@@ -22,12 +23,13 @@ public class TileData : ScriptableObject
         if (go.CompareTag("Player"))
         {
             Player player = go.GetComponent<Player>();
-            UnityEngine.Debug.Log("moving Player down");
+            player.isMoving = true;
             player.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
         }
         else if (go.CompareTag("Enemy"))
         {
             Enemy enemy = go.GetComponent<Enemy>();
+            enemy.isMoving = true;
             enemy.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
         }
     }

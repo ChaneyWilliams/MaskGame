@@ -47,7 +47,7 @@ public void ChangeGameState(GameState newGameState)
 private IEnumerator ChangeGameStateRoutine(GameState newGameState)
 {
     currentGameState = newGameState;
-    Debug.Log(currentGameState);
+    //Debug.Log(currentGameState);
 
     switch (currentGameState)
     {

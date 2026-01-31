@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public Vector2 targetPosition;
     public float direction = 1.0f;
 
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     void Awake()
     {
@@ -20,8 +20,8 @@ public class Enemy : MonoBehaviour
 
     public void StartMove()
     {
-        UnityEngine.Debug.Log("I am Moving");
         isMoving = true;
+        if(rb == null) return;
         targetPosition = rb.position + Vector2.right * direction;
     }
 
@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(rb.position, targetPosition) < 0.01f)
         {
             isMoving = false;
+            GameManager.instance.GetTile(gameObject);
         }
     }
 
