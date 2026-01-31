@@ -55,11 +55,11 @@ private IEnumerator ChangeGameStateRoutine(GameState newGameState)
             yield break;
 
         case GameState.enemyTurn:
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
 
             EnemyTurn();
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
 
             ChangeGameState(GameState.playerTurn);
             break;
