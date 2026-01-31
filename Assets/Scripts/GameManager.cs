@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public UnityEvent nextTurn;
+    public GameState currentGameState;
 
     void Awake()
     {
@@ -16,10 +17,24 @@ public class GameManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
-
-    public void Next()
+    public void ChangeGameState(GameState newGameState)
     {
-        Debug.Log("Next");
+        currentGameState = newGameState;
+
+        switch (currentGameState)
+        {
+            case GameState.playerTurn:
+                break;
+
+            case GameState.enemyTurn:
+                Debug.Log("enemyturn");
+                break;
+        }
     }
 
+    public enum GameState
+    {
+        playerTurn = 0,
+        enemyTurn = 1
+    }
 }
