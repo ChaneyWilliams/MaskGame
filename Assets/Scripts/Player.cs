@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        //if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn) return;
+        if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn) return;
         if (isMoving) return;
 
         Vector2 input = context.ReadValue<Vector2>();

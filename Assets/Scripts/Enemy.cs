@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+
 public class Enemy : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public Transform[] path;
+    public List<Transform> path;
     public float speed = 5f;
 
     private int index = 0;
@@ -19,7 +22,6 @@ public class Enemy : MonoBehaviour
 
     public void StartMove()
     {
-        UnityEngine.Debug.Log("moving");
         isMoving = true;
     }
 
@@ -37,7 +39,7 @@ public class Enemy : MonoBehaviour
         {
             index++;
 
-            if (index >= path.Length)
+            if (index >= path.Count)
             {
                 index = 0;
             }

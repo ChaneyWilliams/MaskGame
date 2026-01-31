@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState newGameState)
     {
         currentGameState = newGameState;
+        Debug.Log(currentGameState);
 
         switch (currentGameState)
         {
@@ -31,14 +32,29 @@ public class GameManager : MonoBehaviour
 
             case GameState.enemyTurn:
                 //Debug.Log("enemy moving");
-                Invoke(nameof(ThisIsDumb), 5.0f);
-                EnemyManager.instance.TakeTurn();
+                Invoke(nameof(EnemyTurn), 1.0f);;
+                ChangeGameState(GameState.playerTurn);
                 //Debug.Log("enemy done");
                 break;
         }
     }
 
 
+    public enum GameState
+    {
+        playerTurn = 0,
+        enemyTurn = 1
+    }
+
+    void EnemyTurn()
+    {
+        EnemyManager.instance.TakeTurn();
+    }
+
+
+/// <summary>
+/// PauseMenu Stuff
+/// </summary>
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -55,16 +71,5 @@ public class GameManager : MonoBehaviour
     public void Quite()
     {
         Application.Quit();
-    }
-
-    public void ThisIsDumb()
-    {
-        Debug.Log("oh my god");
-    }
-
-    public enum GameState
-    {
-        playerTurn = 0,
-        enemyTurn = 1
     }
 }

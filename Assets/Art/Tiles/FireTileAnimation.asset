@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: FireTileAnimation
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
-  m_AnimatedSprites: []
+  m_AnimatedSprites:
+  - {fileID: -684747461075274698, guid: a8cac86bb070319478635d4f767f3178, type: 3}
+  - {fileID: -6565856496209637358, guid: a8cac86bb070319478635d4f767f3178, type: 3}
+  - {fileID: -6080179239916358184, guid: a8cac86bb070319478635d4f767f3178, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
