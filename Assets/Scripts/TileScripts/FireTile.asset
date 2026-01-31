@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d7ff217f6b80f4d87915b94e130921, type: 3}
   m_Name: FireTile
   m_EditorClassIdentifier: Assembly-CSharp::TileData
-  tiles: []
-  test: 0
+  tiles:
+  - {fileID: 11400000, guid: 7903499ac3ab0dc44a9a94972ed22e44, type: 2}
+  tileName: Fire

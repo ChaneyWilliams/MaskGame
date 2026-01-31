@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState newGameState)
     {
         currentGameState = newGameState;
-        Debug.Log(currentGameState);
+        //Debug.Log(currentGameState);
 
         switch (currentGameState)
         {
@@ -49,25 +49,37 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.enemyTurn:
-                //Debug.Log("enemy moving");
                 Invoke(nameof(EnemyTurn), 1.0f); ;
                 ChangeGameState(GameState.playerTurn);
-                //Debug.Log("enemy done");
                 break;
         }
     }
 
-    public int GetTileTest(Vector2 worldPos)
+    public void GetTile(GameObject worldPos)
     {
-        Vector3Int gridPosition = map.WorldToCell(worldPos);
+        Vector3Int gridPosition = map.WorldToCell(worldPos.transform.position);
 
         TileBase tile = map.GetTile(gridPosition);
 
-        if (tile == null) return 99;
+        if (tile == null) return;
 
-        int testNum = dataFromTile[tile].test;
-
-        return testNum;
+        TileData tileInfo = dataFromTile[tile];
+        Debug.Log("this is a " + tileInfo.tileName);
+        if(tileInfo.tileName != "Normal")
+        {
+            if(tileInfo.tileName == "Fire")
+            {
+                tileInfo.FireTile(worldPos);
+            }
+            else if(tileInfo.tileName == "Earth")
+            {
+                tileInfo.EarthTile(worldPos);
+            }
+            else if(tileInfo.tileName == "Water")
+            {
+                tileInfo.WaterTile(worldPos);
+            }
+        }
     }
 
     public enum GameState
