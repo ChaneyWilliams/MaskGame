@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        //SoundEffectManager.Play("MenuMusic");
         map = GameObject.FindWithTag("Tileamap").GetComponent<Tilemap>();
     }
     public void ChangeGameState(GameState newGameState)
