@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
         animator.SetTrigger("FadeIn");
     }
 
+    public void ResetLevel()
+    {
+        StartCoroutine(LoadLevelName(SceneManager.GetActiveScene().name));
+    }
+
 
     public void WinScreen()
     {

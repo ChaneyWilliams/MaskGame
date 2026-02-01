@@ -289,6 +289,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 38610dc4-2298-4cd9-9b56-a8465e6d6421
     m_ActionName: 'Player/Water[/Keyboard/4]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2166435346610645298}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 088345c1-f3bf-41cf-8824-d10fc92a66c5
+    m_ActionName: 'Player/Reset[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -338,6 +354,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   animator: {fileID: 5395262772129724165}
   stuck: 0
+  gameOver: 0
 --- !u!95 &5395262772129724165
 Animator:
   serializedVersion: 7
