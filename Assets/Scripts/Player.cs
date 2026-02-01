@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float speed = 5.0f;
     public Vector3 targetPosition;
     public Animator animator;
-    float direction = 1.0f;
+    public bool stuck = false;
 
     void Awake()
     {
@@ -38,8 +38,14 @@ public class Player : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn) return;
-        if (animator.GetBool("isMoving")) return;
+        if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn || animator.GetBool("isMoving")) return;
+        if (stuck)
+        {
+            Debug.Log("Youre stuck womp womp");
+            GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
+            stuck = false;
+            return;
+        }
 
         Vector2 input = context.ReadValue<Vector2>();
         if (input.x > 0)

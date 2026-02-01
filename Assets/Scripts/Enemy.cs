@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float direction = 1.0f;
 
     public bool isMoving = false;
+    public bool stuck = false;
 
     void Awake()
     {
@@ -20,9 +21,16 @@ public class Enemy : MonoBehaviour
 
     public void StartMove()
     {
-        isMoving = true;
-        if(rb == null) return;
-        targetPosition = rb.position + Vector2.right * direction;
+        if (!stuck)
+        {
+            isMoving = true;
+            if (rb == null) return;
+            targetPosition = rb.position + Vector2.right * direction;
+        }
+        else
+        {
+            stuck = false;   
+        }
     }
 
     void FixedUpdate()

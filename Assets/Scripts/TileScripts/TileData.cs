@@ -34,13 +34,14 @@ public class TileData : ScriptableObject
     }
     public void EarthTile(GameObject go)
     {
-        if(GameManager.instance.currentGameState == GameManager.GameState.playerTurn)
+        if (go.CompareTag("Player"))
         {
-            GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
+            Player.instance.stuck = true;
         }
-        else if(GameManager.instance.currentGameState == GameManager.GameState.enemyTurn)
+        else if (go.CompareTag("Enemy"))
         {
-            GameManager.instance.ChangeGameState(GameManager.GameState.playerTurn);
+            Enemy enemy = go.GetComponent<Enemy>();
+            enemy.stuck = true;
         }
     }
 
