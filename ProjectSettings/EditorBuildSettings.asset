@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Puzzles/Puzzle1.unity
     guid: 10267a97e5bc06b48a9ac3699f0fd2f4
   - enabled: 1
+    path: Assets/Scenes/Puzzles/Puzzle2.unity
+    guid: 6ad13193e77083f4c8e4222a1c8e6286
+  - enabled: 1
     path: Assets/Scenes/ChaneyTest.unity
     guid: e6b4c6a2f88712b458bd70324cd16a48
   m_configObjects:
