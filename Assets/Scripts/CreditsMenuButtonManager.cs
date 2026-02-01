@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class CreditsMenuButtonManager : MonoBehaviour
 {
-    [SerializeField] MainMenuManager.SocialButtons _buttonType;
+    //[SerializeField] MainMenuManager.SocialButtons _buttonType;
     public void ButtonClicked()
     {
-        MainMenuManager._.SocialButtonClicked(_buttonType);
+        //MainMenuManager._.SocialButtonClicked(_buttonType);
     }
 }
