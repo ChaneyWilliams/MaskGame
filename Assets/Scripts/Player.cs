@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float speed = 5.0f;
     public Vector3 targetPosition;
     public Animator animator;
+    float direction = 1.0f;
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(!animator.GetBool("isMoving")) return;
+        if (!animator.GetBool("isMoving")) return;
 
         rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
 
@@ -41,6 +42,14 @@ public class Player : MonoBehaviour
         if (animator.GetBool("isMoving")) return;
 
         Vector2 input = context.ReadValue<Vector2>();
+        if (input.x > 0)
+        {
+            gameObject.transform.localScale = new Vector3(Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+        }
+        else if (input.x < 0)
+        {
+            gameObject.transform.localScale = new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+        }
 
         if (Mathf.Abs(input.x) == 1f)
         {
