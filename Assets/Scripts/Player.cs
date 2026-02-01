@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
             stuck = false;
             return;
         }
-
+        SoundEffectManager.Play("Gravel_Footsteps");
         Vector3 oldTargetPosition = targetPosition;
         Vector2 input = context.ReadValue<Vector2>();
 

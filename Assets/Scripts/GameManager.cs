@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public bool GameIsPaused = false;
     string oldSceneName;
     public GameObject winScreen;
+    public float timeBetweenTurns = 0.25f;
 
     void Awake()
     {
@@ -47,11 +48,11 @@ public class GameManager : MonoBehaviour
                 yield break;
 
             case GameState.enemyTurn:
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(timeBetweenTurns);
 
                 turnText.text = "Monster Turn";
                 EnemyTurn();
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(timeBetweenTurns);
                 turnText.text = "Player Turn";
                 ChangeGameState(GameState.playerTurn);
                 break;
@@ -85,22 +86,22 @@ public class GameManager : MonoBehaviour
         //oldSceneName = SceneManager.GetActiveScene().name;
         if (animator != null)
         {
-            animator.SetTrigger("Start");
+            animator.SetTrigger("End");
             yield return new WaitForSeconds(1);
         }
         SceneManager.LoadScene(levelName);
-        animator.SetTrigger("End");
+        animator.SetTrigger("Start");
     }
     IEnumerator LoadLevelBuildIndex()
     {
         //oldSceneName = SceneManager.GetActiveScene().name;
         if (animator != null)
         {
-            animator.SetTrigger("Start");
+            animator.SetTrigger("End");
             yield return new WaitForSeconds(1);
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        animator.SetTrigger("End");
+        animator.SetTrigger("Start");
     }
 
 

@@ -39,6 +39,7 @@ public class TileData : ScriptableObject
             {
                 Player.instance.stuck = true;
             }
+            SoundEffectManager.Play("FireWhoosh");
             
         }
     }
@@ -64,6 +65,7 @@ public class TileData : ScriptableObject
             {
                 Player.instance.stuck = true;
             }
+            SoundEffectManager.Play("WaterSplash");
         }
         else if (go.CompareTag("Enemy"))
         {
@@ -94,6 +96,7 @@ public class TileData : ScriptableObject
             {
                 Player.instance.stuck = true;
             }
+            SoundEffectManager.Play("PlantGrowth");
             
         }
         else if (go.CompareTag("Enemy"))
