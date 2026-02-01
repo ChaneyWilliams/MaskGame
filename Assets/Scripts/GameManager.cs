@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState;
     public GameObject pauseMenuUI;
     public bool GameIsPaused = false;
+    public GameObject totalWinScreen;
     string oldSceneName;
     public GameObject winScreen;
     public float timeBetweenTurns = 0.25f;
@@ -80,6 +81,11 @@ public class GameManager : MonoBehaviour
     /// UI Stuff
     /// </summary>
     /// 
+    /// 
+    public void Congrats()
+    {
+        totalWinScreen.SetActive(true);
+    }
 
     IEnumerator LoadLevelName(string levelName)
     {

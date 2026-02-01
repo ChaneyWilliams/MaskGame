@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Security;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "TileData", menuName = "Scriptable Objects/TileData")]
 public class TileData : ScriptableObject
@@ -13,8 +14,15 @@ public class TileData : ScriptableObject
 
     public void GoalTile(GameObject go)
     {
-        GameManager.instance.WinScreen();
-        Player.instance.gameOver = true;
+        if (SceneManager.GetActiveScene().name == "Puzzle5")
+        {
+            GameManager.instance.Congrats();
+        }
+        else
+        {
+            GameManager.instance.WinScreen();
+            Player.instance.gameOver = true;
+        }
     }
 
 
@@ -41,7 +49,7 @@ public class TileData : ScriptableObject
                 Player.instance.stuck = true;
             }
             SoundEffectManager.Play("FireWhoosh");
-            
+
         }
     }
     public void WaterTile(GameObject go)
@@ -100,7 +108,7 @@ public class TileData : ScriptableObject
                 Player.instance.stuck = true;
             }
             SoundEffectManager.Play("PlantGrowth");
-            
+
         }
         else if (go.CompareTag("Enemy"))
         {

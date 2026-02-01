@@ -8,11 +8,12 @@ public class Enemy : MonoBehaviour
     public float speed = 5f;
     public Vector2 targetPosition;
     public float direction = 1.0f;
+    public bool vertical;
 
     public bool isMoving = false;
     public bool stuck = false;
 
-    void Awake()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         targetPosition = rb.position;
@@ -42,13 +43,19 @@ public class Enemy : MonoBehaviour
 
     public void StartMove()
     {
-        Vector2 oldTargetPosition = targetPosition;
         if (!stuck)
         {
             Vector2 oldTargetPos = targetPosition;
             isMoving = true;
             if (rb == null) return;
-            targetPosition = rb.position + Vector2.right * direction;
+            if (vertical)
+            {
+                targetPosition = rb.position + Vector2.up * direction;
+            }
+            else
+            {
+                targetPosition = rb.position + Vector2.right * direction;
+            }
             if (GameManager.instance.GetTile(targetPosition) == null)
             {
                 targetPosition = oldTargetPos;
