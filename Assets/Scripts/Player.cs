@@ -41,26 +41,19 @@ public class Player : MonoBehaviour
         if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn || animator.GetBool("isMoving")) return;
         if (stuck)
         {
-            Debug.Log("Youre stuck womp womp");
             GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
             stuck = false;
             return;
         }
 
         Vector2 input = context.ReadValue<Vector2>();
-        if (input.x > 0)
-        {
-            gameObject.transform.localScale = new Vector3(Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-        }
-        else if (input.x < 0)
-        {
-            gameObject.transform.localScale = new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-        }
-
         if (Mathf.Abs(input.x) == 1f)
         {
             targetPosition = transform.position + new Vector3(input.x, 0f, 0f);
             animator.SetBool("isMoving", true);
+            gameObject.transform.localScale = (input.x < 0) ? 
+            new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z): 
+            new Vector3(Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
         }
         else if (Mathf.Abs(input.y) == 1f)
         {
