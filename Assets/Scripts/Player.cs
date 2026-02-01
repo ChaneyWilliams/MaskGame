@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         if (!animator.GetBool("isMoving")) return;
-        SoundEffectManager.Play("Gravel_Footsteps");
+        //SoundEffectManager.Play("Gravel_Footsteps"); NOT HERE calls like 70 times
         rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
 
         if (Vector3.Distance(rb.position, targetPosition) < 0.01f)

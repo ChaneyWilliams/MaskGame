@@ -19,11 +19,6 @@ public class GameManager : MonoBehaviour
     public bool GameIsPaused = false;
     string oldSceneName;
     public GameObject winScreen;
-    [SerializeField] private Tilemap map;
-
-    [SerializeField] List<TileData> tileDatas;
-
-    private Dictionary<TileBase, TileData> dataFromTile;
 
     void Awake()
     {
@@ -34,21 +29,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
-
-        dataFromTile = new Dictionary<TileBase, TileData>();
-
-        foreach (var tileData in tileDatas)
-        {
-            foreach (var tile in tileData.tiles)
-            {
-                dataFromTile.Add(tile, tileData);
-            }
-        }
-    }
-    void Start()
-    {
-        //SoundEffectManager.Play("MenuMusic");
-        map = GameObject.FindWithTag("Tileamap").GetComponent<Tilemap>();
     }
     public void ChangeGameState(GameState newGameState)
     {
@@ -78,22 +58,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public TileData GetTile(Vector3 entered)
-    {
-        Vector3Int gridPosition = map.WorldToCell(entered);
-
-        TileBase tile = map.GetTile(gridPosition);
-
-        if (tile == null) return null;
-
-        return dataFromTile[tile];
-        //Debug.Log(tileInfo.tileName);
-    }
-
     public enum GameState
     {
         playerTurn = 0,
         enemyTurn = 1
+    }
+    public TileData GetTile(Vector3 entered)
+    {
+        return MapManager.instance.GetTileFromMap(entered);
     }
 
     void EnemyTurn()

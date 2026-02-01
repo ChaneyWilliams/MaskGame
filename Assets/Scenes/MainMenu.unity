@@ -311,13 +311,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2126219989}
-    - targetCorrespondingSourceObject: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2126219988}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
 --- !u!1001 &48304759
 PrefabInstance:
@@ -3215,39 +3209,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7785219019240733532, guid: 4faee1d8b55248b45bca493300842dcf, type: 3}
   m_PrefabInstance: {fileID: 2098471372}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2126219987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
-  m_PrefabInstance: {fileID: 4884415}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2126219988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126219987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4f0b8a5f6e584f488ccb471edcfcb3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SoundEffectManager
---- !u!114 &2126219989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126219987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c2955dd2fe1ed4b95b5bcb360ae3d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SoundEffectLibrary
-  soundEffectGroups:
-  - name: Gravel_Footsteps
-    audioClip:
-    - {fileID: 8300000, guid: 994c0cd3e67987247a046fedf566d10a, type: 3}
 --- !u!222 &206835883148889310
 CanvasRenderer:
   m_ObjectHideFlags: 0

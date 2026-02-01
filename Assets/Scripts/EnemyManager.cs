@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -11,8 +10,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            instance = this;;
         }
         else { Destroy(gameObject); }
     }
