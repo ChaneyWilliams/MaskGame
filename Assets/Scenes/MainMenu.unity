@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CHANEY WILLIAMS - LEAD PROGRAMMER
+  m_text: CHANEY WILLIAMS - Lead Programmer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
   m_sharedMaterial: {fileID: 1935040719194940303, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
@@ -256,6 +256,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677569}
   m_CullTransparentMesh: 1
+--- !u!1001 &4884415
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3039
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.20587
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347729040192629966, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2126219989}
+    - targetCorrespondingSourceObject: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2126219988}
+  m_SourcePrefab: {fileID: 100100000, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
 --- !u!1001 &48304759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -496,8 +559,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SETTINGS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
-  m_sharedMaterial: {fileID: 1935040719194940303, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -954,7 +1017,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Anastasia - Game Artist
+  m_text: ANASTASIA - Game Artist
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
   m_sharedMaterial: {fileID: 1935040719194940303, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
@@ -2103,8 +2166,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MUSIC/SFX VOLUME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
-  m_sharedMaterial: {fileID: 1935040719194940303, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2667,7 +2730,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JOSH Carlat - Audio Producer/UI Programmer
+  m_text: JOSH CARLAT - Audio Producer/UI Programmer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
   m_sharedMaterial: {fileID: 1935040719194940303, guid: ee3016e05cd86d041b1aecb034d04c66, type: 2}
@@ -2900,7 +2963,7 @@ MonoBehaviour:
   _MainMenuContainer: {fileID: 1198572658}
   _CreditsMenuContainer: {fileID: 977848282}
   _SettingsMenuContainer: {fileID: 460724740}
-  _sceneToLoadAfterClickingPlay: JoshTest
+  _sceneToLoadAfterClickingPlay: Puzzle1
 --- !u!1001 &1836002830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3152,6 +3215,39 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7785219019240733532, guid: 4faee1d8b55248b45bca493300842dcf, type: 3}
   m_PrefabInstance: {fileID: 2098471372}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2126219987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+  m_PrefabInstance: {fileID: 4884415}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2126219988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126219987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f0b8a5f6e584f488ccb471edcfcb3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundEffectManager
+--- !u!114 &2126219989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126219987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c2955dd2fe1ed4b95b5bcb360ae3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundEffectLibrary
+  soundEffectGroups:
+  - name: Gravel_Footsteps
+    audioClip:
+    - {fileID: 8300000, guid: 994c0cd3e67987247a046fedf566d10a, type: 3}
 --- !u!222 &206835883148889310
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3446,3 +3542,4 @@ SceneRoots:
   - {fileID: 1957807062}
   - {fileID: 1774442544}
   - {fileID: 1198227948}
+  - {fileID: 4884415}
