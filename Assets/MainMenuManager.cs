@@ -5,6 +5,8 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager _;
     [SerializeField] private bool _debugMode;
     public enum MainMenuButtons { play, options, credits, quit };
+    public enum CreditsButtons { back };
+    public enum SettingsButtons { back };
     [SerializeField] private string _sceneToLoadAfterClickingPlay;
     public void Awake()
     {
@@ -36,6 +38,11 @@ public class MainMenuManager : MonoBehaviour
                 Debug.Log("Button clicked that wasn't impelmented in MainMenuManager Method");
                 break;
         }
+    }
+
+    public void CreditsButtonClicked(CreditsButtons buttonClicked)
+    {
+        
     }
     private void DebugMessage(string message)
     {
