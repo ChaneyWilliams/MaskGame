@@ -2719,7 +2719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSlider
   Mixer: {fileID: 24100000, guid: 49f01cdc01d8a8c4dac12adbf9f0ccb6, type: 2}
-  AudioSource: {fileID: 1198227947}
+  AudioSource: {fileID: 1868745950}
   ValueText: {fileID: 1282615071}
   MixMode: 2
 --- !u!1 &1646502066
@@ -3369,11 +3369,11 @@ AudioSource:
   m_GameObject: {fileID: 1868745948}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 49f01cdc01d8a8c4dac12adbf9f0ccb6, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
