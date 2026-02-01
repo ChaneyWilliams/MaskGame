@@ -68,28 +68,29 @@ private IEnumerator ChangeGameStateRoutine(GameState newGameState)
 }
 
 
-    public void GetTile(GameObject worldPos)
+    public void GetTile(GameObject entered)
     {
-        Vector3Int gridPosition = map.WorldToCell(worldPos.transform.position);
+        Vector3Int gridPosition = map.WorldToCell(entered.transform.position);
 
         TileBase tile = map.GetTile(gridPosition);
 
         if (tile == null) return;
 
         TileData tileInfo = dataFromTile[tile];
+        //Debug.Log(tileInfo.tileName);
         if(tileInfo.tileName != "Normal")
         {
             if(tileInfo.tileName == "Fire")
             {
-                tileInfo.FireTile(worldPos);
+                tileInfo.FireTile(entered);
             }
             else if(tileInfo.tileName == "Earth")
             {
-                tileInfo.EarthTile(worldPos);
+                tileInfo.EarthTile(entered);
             }
             else if(tileInfo.tileName == "Water")
             {
-                tileInfo.WaterTile(worldPos);
+                tileInfo.WaterTile(entered);
             }
         }
     }
