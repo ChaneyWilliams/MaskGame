@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState;
     public GameObject pauseMenuUI;
     public bool GameIsPaused = false;
+    string oldSceneName;
+    public GameObject winScreen;
     [SerializeField] private Tilemap map;
 
     [SerializeField] List<TileData> tileDatas;
@@ -71,7 +73,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     public TileData GetTile(Vector3 entered)
     {
         Vector3Int gridPosition = map.WorldToCell(entered);
@@ -101,7 +102,8 @@ public class GameManager : MonoBehaviour
     /// UI Stuff
     /// </summary>
     /// 
-    IEnumerator LoadLevel(string levelName)
+
+    IEnumerator LoadLevelName(string levelName)
     {
         //oldSceneName = SceneManager.GetActiveScene().name;
         if (animator != null)
@@ -112,7 +114,38 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(levelName);
         animator.SetTrigger("End");
     }
+    IEnumerator LoadLevelBuildIndex()
+    {
+        //oldSceneName = SceneManager.GetActiveScene().name;
+        if (animator != null)
+        {
+            animator.SetTrigger("Start");
+            yield return new WaitForSeconds(1);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        animator.SetTrigger("End");
+    }
 
+
+    public void WinScreen()
+    {
+        winScreen.SetActive(true);
+    }
+    public void NextPuzzle()
+    {
+        winScreen.SetActive(false);
+        StartCoroutine(LoadLevelBuildIndex());
+    }
+    public void LoadMainMenu()
+    {
+        winScreen.SetActive(false);
+        oldSceneName = SceneManager.GetActiveScene().name;
+        StartCoroutine(LoadLevelName("MainMenu"));
+    }
+    public void LoadLastScene()
+    {
+        StartCoroutine(LoadLevelName(oldSceneName));
+    }
     public void Resume()
     {
         pauseMenuUI.SetActive(false);

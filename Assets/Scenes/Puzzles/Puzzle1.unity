@@ -476,7 +476,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8332719547452625948, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1851,8 +1852,8 @@ Tilemap:
   - first: {x: 9, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2664,15 +2665,19 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 10640b9f42b47ca4f9de66672330efc5, type: 2}
   - m_RefCount: 38
     m_Data: {fileID: 11400000, guid: d940790bf52db5647b3359ec6e0fdf27, type: 2}
-  - m_RefCount: 18
+  - m_RefCount: 17
     m_Data: {fileID: 11400000, guid: aa16b2b0d1932e74b8afc93ab0670d5d, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: f6ef136b14a309b409c372a548a85779, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 144
     m_Data: {fileID: -34281490362677317, guid: 98622664f2f63d94e96c7916ac6c40a2, type: 3}
   - m_RefCount: 38
     m_Data: {fileID: -5356574185940491189, guid: 7991142e1a7b1ae498e851cbd6051041, type: 3}
-  - m_RefCount: 18
+  - m_RefCount: 17
     m_Data: {fileID: 2408966384064685019, guid: e2e9c285e6b132947aea3d1a3a3583e7, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -3457448024721243918, guid: 0e0e5d96ca1a0c949ab12a40a88ad6bd, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 200
     m_Data:
