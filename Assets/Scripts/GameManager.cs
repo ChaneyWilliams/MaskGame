@@ -111,27 +111,32 @@ public class GameManager : MonoBehaviour
     }
     public void NextPuzzle()
     {
+        SoundEffectManager.Play("ButtonClick");
         winScreen.SetActive(false);
         StartCoroutine(LoadLevelBuildIndex());
     }
     public void LoadMainMenu()
     {
+        SoundEffectManager.Play("ButtonClick");
         winScreen.SetActive(false);
         oldSceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(LoadLevelName("MainMenu"));
     }
     public void LoadLastScene()
     {
+        SoundEffectManager.Play("ButtonClick");
         StartCoroutine(LoadLevelName(oldSceneName));
     }
     public void Resume()
     {
+        SoundEffectManager.Play("PauseSFX");
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
         Time.timeScale = 1.0f;
     }
     public void Paused()
     {
+        SoundEffectManager.Play("PauseSFX");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0.0f;
         GameIsPaused = true;
@@ -139,6 +144,7 @@ public class GameManager : MonoBehaviour
 
     public void Quite()
     {
+        SoundEffectManager.Play("ButtonClick");
         Application.Quit();
     }
 }

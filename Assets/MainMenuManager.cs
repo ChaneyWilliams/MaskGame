@@ -62,6 +62,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void CreditsButtonClicked(CreditsButtons buttonClicked)
     {
+        SoundEffectManager.Play("ButtonClick");
         switch(buttonClicked)
         {
             case CreditsButtons.back:
@@ -71,6 +72,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void SettingsButtonClicked(SettingsButtons buttonClicked)
     {
+        SoundEffectManager.Play("ButtonClick");
         switch (buttonClicked)
         {
             case SettingsButtons.back:
@@ -87,10 +89,12 @@ public class MainMenuManager : MonoBehaviour
     }
     public void PlayClicked()
     {
+        SoundEffectManager.Play("ButtonClick");
         UnityEngine.SceneManagement.SceneManager.LoadScene(_sceneToLoadAfterClickingPlay);
     }
     public void QuitGame()
     {
+        SoundEffectManager.Play("ButtonClick");
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.ExitPlaymode();
         #else

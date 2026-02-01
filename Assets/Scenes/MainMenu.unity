@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
       propertyPath: soundEffectGroups.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
       propertyPath: soundEffectGroups.Array.data[1].name
@@ -321,6 +321,14 @@ PrefabInstance:
       value: WaterSplash
       objectReference: {fileID: 0}
     - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: soundEffectGroups.Array.data[4].name
+      value: ButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: soundEffectGroups.Array.data[5].name
+      value: PauseSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
       propertyPath: soundEffectGroups.Array.data[1].audioClip.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -333,17 +341,33 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: soundEffectGroups.Array.data[4].audioClip.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: soundEffectGroups.Array.data[5].audioClip.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
       propertyPath: 'soundEffectGroups.Array.data[1].audioClip.Array.data[0]'
       value: 
-      objectReference: {fileID: 8300000, guid: 4e02c1fe71c659a4ebb4a081f175aa3c, type: 3}
+      objectReference: {fileID: 8300000, guid: 0715afd4cd5d9904297565e79dc27135, type: 3}
     - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
       propertyPath: 'soundEffectGroups.Array.data[2].audioClip.Array.data[0]'
       value: 
-      objectReference: {fileID: 8300000, guid: f9b93bb637c289847b249e7bba158a9f, type: 3}
+      objectReference: {fileID: 8300000, guid: c68f86cbb7b821f439f9dcfaa0c0bc80, type: 3}
     - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
       propertyPath: 'soundEffectGroups.Array.data[3].audioClip.Array.data[0]'
       value: 
-      objectReference: {fileID: 8300000, guid: 4d53e1a082d452a489742974eb6810da, type: 3}
+      objectReference: {fileID: 8300000, guid: 1aaa40ede967edc4c813f27b2a51b94a, type: 3}
+    - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: 'soundEffectGroups.Array.data[4].audioClip.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 7eab9e409b46b2f429b5c94269af77dc, type: 3}
+    - target: {fileID: 4230312460019620310, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
+      propertyPath: 'soundEffectGroups.Array.data[5].audioClip.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 00decc5a7b54bda4bbb864a60a292735, type: 3}
     - target: {fileID: 8444380397963590556, guid: 122ebd2e3deaea740bfa571f69ee3f45, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -3177,7 +3201,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 0.381
   m_Pitch: 1
   Loop: 1
   Mute: 0
