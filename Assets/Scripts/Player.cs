@@ -6,6 +6,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
     private Rigidbody2D rb;
     public PlayerState currentPlayerState;
     public float speed = 5.0f;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody2D>();
         targetPosition = transform.position;
     }
@@ -80,6 +82,7 @@ public class Player : MonoBehaviour
             case PlayerState.WaterState:
                 break;
         }
+        GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
     }
 
     public enum PlayerState
