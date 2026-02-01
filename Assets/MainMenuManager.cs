@@ -90,7 +90,7 @@ public class MainMenuManager : MonoBehaviour
     public void PlayClicked()
     {
         SoundEffectManager.Play("ButtonClick");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(_sceneToLoadAfterClickingPlay);
+        GameManager.instance.NextPuzzle();
     }
     public void QuitGame()
     {

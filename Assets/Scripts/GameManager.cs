@@ -86,22 +86,22 @@ public class GameManager : MonoBehaviour
         //oldSceneName = SceneManager.GetActiveScene().name;
         if (animator != null)
         {
-            animator.SetTrigger("End");
+            animator.SetTrigger("FadeOut");
             yield return new WaitForSeconds(1);
         }
         SceneManager.LoadScene(levelName);
-        animator.SetTrigger("Start");
+        animator.SetTrigger("FadeIn");
     }
     IEnumerator LoadLevelBuildIndex()
     {
         //oldSceneName = SceneManager.GetActiveScene().name;
         if (animator != null)
         {
-            animator.SetTrigger("End");
+            animator.SetTrigger("FadeOut");
             yield return new WaitForSeconds(1);
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        animator.SetTrigger("Start");
+        animator.SetTrigger("FadeIn");
     }
 
 
@@ -129,14 +129,12 @@ public class GameManager : MonoBehaviour
     }
     public void Resume()
     {
-        SoundEffectManager.Play("PauseSFX");
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
         Time.timeScale = 1.0f;
     }
     public void Paused()
     {
-        SoundEffectManager.Play("PauseSFX");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0.0f;
         GameIsPaused = true;
