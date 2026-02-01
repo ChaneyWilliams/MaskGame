@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: WaterTile
+  m_Name: FireTileAnimation
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
-  m_AnimatedSprites: []
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  m_AnimatedSprites:
+  - {fileID: -6349618964453668424, guid: 0144a574e7a0cbd47882ee58864db33b, type: 3}
+  - {fileID: 1081315098, guid: 0144a574e7a0cbd47882ee58864db33b, type: 3}
+  - {fileID: -361312594, guid: 0144a574e7a0cbd47882ee58864db33b, type: 3}
+  m_MinSpeed: 4
+  m_MaxSpeed: 4
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0

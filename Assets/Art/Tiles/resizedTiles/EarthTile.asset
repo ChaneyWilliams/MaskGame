@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: FireTileAnimation
+  m_Name: EarthTile
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
   m_AnimatedSprites:
-  - {fileID: -684747461075274698, guid: a8cac86bb070319478635d4f767f3178, type: 3}
-  - {fileID: -6565856496209637358, guid: a8cac86bb070319478635d4f767f3178, type: 3}
-  - {fileID: -6080179239916358184, guid: a8cac86bb070319478635d4f767f3178, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: -6050695943259059418, guid: 2c40bb493321aac428bf92602d3c9c50, type: 3}
+  - {fileID: 1800070528, guid: 2c40bb493321aac428bf92602d3c9c50, type: 3}
+  - {fileID: -2058884093, guid: 2c40bb493321aac428bf92602d3c9c50, type: 3}
+  m_MinSpeed: 4
+  m_MaxSpeed: 4
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0

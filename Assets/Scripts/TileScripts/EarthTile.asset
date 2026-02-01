@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d7ff217f6b80f4d87915b94e130921, type: 3}
-  m_Name: NormalTile
+  m_Name: EarthTile
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tiles:
-  - {fileID: 11400000, guid: 10640b9f42b47ca4f9de66672330efc5, type: 2}
-  tileName: Normal
+  - {fileID: 11400000, guid: 53d0b4b56115705438cf866ec52f486f, type: 2}
+  tileName: Earth

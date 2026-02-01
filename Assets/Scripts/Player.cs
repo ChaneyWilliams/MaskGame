@@ -6,19 +6,22 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
     private Rigidbody2D rb;
+    public PlayerState currentPlayerState;
     public float speed = 5.0f;
-    Vector3 targetPosition;
-    bool isMoving = false;
+    public Vector3 targetPosition;
+    public bool isMoving = false;
 
     void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody2D>();
         targetPosition = transform.position;
     }
     void FixedUpdate()
     {
-        if (!isMoving) return;
+        if(!isMoving) return;
 
         rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
 
@@ -26,6 +29,8 @@ public class Player : MonoBehaviour
         {
             rb.position = targetPosition;
             isMoving = false;
+            GameManager.instance.GetTile(gameObject);
+            GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
         }
     }
 
@@ -47,8 +52,6 @@ public class Player : MonoBehaviour
             targetPosition = transform.position + new Vector3(0f, input.y, 0f);
             isMoving = true;
         }
-
-        GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
     }
 
     public void PauseGame(InputAction.CallbackContext context)
@@ -61,6 +64,34 @@ public class Player : MonoBehaviour
         {
             GameManager.instance.Paused();
         }
+    }
+
+    public void ChangePlayerState(PlayerState newState)
+    {
+        currentPlayerState = newState;
+        Debug.Log(currentPlayerState);
+
+        switch (currentPlayerState)
+        {
+            case PlayerState.NormalState:
+                break;
+            case PlayerState.EarthState:
+                break;
+            case PlayerState.FireState:
+                break;
+            case PlayerState.WaterState:
+                break;
+        }
+        GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
+    }
+
+    public enum PlayerState
+    {
+        NormalState = 0,
+        EarthState = 1,
+        FireState = 2,
+        WaterState = 3
+
     }
 
 }

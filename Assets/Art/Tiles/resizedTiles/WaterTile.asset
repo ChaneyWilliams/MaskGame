@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: EarthTile
+  m_Name: WaterTile
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
-  m_AnimatedSprites: []
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  m_AnimatedSprites:
+  - {fileID: -3202817226302474182, guid: 1d29de4d1dd38944e907925d2cdd7e04, type: 3}
+  - {fileID: -1472465365, guid: 1d29de4d1dd38944e907925d2cdd7e04, type: 3}
+  - {fileID: -2047533484, guid: 1d29de4d1dd38944e907925d2cdd7e04, type: 3}
+  m_MinSpeed: 4
+  m_MaxSpeed: 4
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0

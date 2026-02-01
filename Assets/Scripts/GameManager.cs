@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using System.Collections;
 
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -37,37 +38,59 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+public void ChangeGameState(GameState newGameState)
+{
+    StopAllCoroutines();
+    StartCoroutine(ChangeGameStateRoutine(newGameState));
+}
 
-    public void ChangeGameState(GameState newGameState)
+private IEnumerator ChangeGameStateRoutine(GameState newGameState)
+{
+    currentGameState = newGameState;
+    //Debug.Log(currentGameState);
+
+    switch (currentGameState)
     {
-        currentGameState = newGameState;
-        Debug.Log(currentGameState);
+        case GameState.playerTurn:
+            yield break;
 
-        switch (currentGameState)
-        {
-            case GameState.playerTurn:
-                break;
+        case GameState.enemyTurn:
+            yield return new WaitForSeconds(0.5f);
 
-            case GameState.enemyTurn:
-                //Debug.Log("enemy moving");
-                Invoke(nameof(EnemyTurn), 1.0f); ;
-                ChangeGameState(GameState.playerTurn);
-                //Debug.Log("enemy done");
-                break;
-        }
+            EnemyTurn();
+
+            yield return new WaitForSeconds(0.5f);
+
+            ChangeGameState(GameState.playerTurn);
+            break;
     }
+}
 
-    public int GetTileTest(Vector2 worldPos)
+
+    public void GetTile(GameObject worldPos)
     {
-        Vector3Int gridPosition = map.WorldToCell(worldPos);
+        Vector3Int gridPosition = map.WorldToCell(worldPos.transform.position);
 
         TileBase tile = map.GetTile(gridPosition);
 
-        if (tile == null) return 99;
+        if (tile == null) return;
 
-        int testNum = dataFromTile[tile].test;
-
-        return testNum;
+        TileData tileInfo = dataFromTile[tile];
+        if(tileInfo.tileName != "Normal")
+        {
+            if(tileInfo.tileName == "Fire")
+            {
+                tileInfo.FireTile(worldPos);
+            }
+            else if(tileInfo.tileName == "Earth")
+            {
+                tileInfo.EarthTile(worldPos);
+            }
+            else if(tileInfo.tileName == "Water")
+            {
+                tileInfo.WaterTile(worldPos);
+            }
+        }
     }
 
     public enum GameState
