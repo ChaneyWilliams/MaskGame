@@ -121,6 +121,14 @@ public class Player : MonoBehaviour
             ChangePlayerState(PlayerState.WaterState);
         }
     }
+
+    public void Reset(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.instance.ResetLevel();
+        }
+    }
     public void ChangePlayerState(PlayerState newState)
     {
         currentPlayerState = newState;
