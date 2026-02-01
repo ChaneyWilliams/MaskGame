@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,19 +12,50 @@ public class TileData : ScriptableObject
 
     public void FireTile(GameObject go)
     {
-        UnityEngine.Debug.Log("REKT");
         if (go.CompareTag("Player"))
         {
-            UnityEngine.Debug.Log("GameOver");
+            if (Player.instance.currentPlayerState == Player.PlayerState.FireState)
+            {
+                Player.instance.animator.SetBool("isMoving", true);
+                Player.instance.targetPosition = go.transform.position + new Vector3(-2.0f, 0.0f, 0f);
+            }
+            else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
+            {
+                return;
+            }
+            else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
+            {
+                Destroy(go);
+            }
+            else
+            {
+                Player.instance.stuck = true;
+            }
+            
         }
-        Destroy(go);
     }
     public void WaterTile(GameObject go)
     {
         if (go.CompareTag("Player"))
         {
-            Player.instance.animator.SetBool("isMoving", true);
-            Player.instance.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
+            if (Player.instance.currentPlayerState == Player.PlayerState.FireState)
+            {
+                Destroy(go);
+            }
+            else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
+            {
+                Player.instance.animator.SetBool("isMoving", true);
+                Player.instance.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
+
+            }
+            else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
+            {
+                return;
+            }
+            else
+            {
+                Player.instance.stuck = true;
+            }
         }
         else if (go.CompareTag("Enemy"))
         {
@@ -36,7 +68,24 @@ public class TileData : ScriptableObject
     {
         if (go.CompareTag("Player"))
         {
-            Player.instance.stuck = true;
+            if (Player.instance.currentPlayerState == Player.PlayerState.FireState)
+            {
+                return;
+            }
+            else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
+            {
+                Destroy(go);
+
+            }
+            else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
+            {
+                Player.instance.animator.SetBool("isMoving", true);
+                Player.instance.targetPosition = go.transform.position + new Vector3(0f, 1.0f, 0f);
+            }
+            else
+            {
+                Player.instance.stuck = true;
+            }
         }
         else if (go.CompareTag("Enemy"))
         {

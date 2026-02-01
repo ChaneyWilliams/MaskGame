@@ -7,6 +7,9 @@ public class MainMenuManager : MonoBehaviour
     public enum MainMenuButtons { play, options, credits, quit };
     public enum CreditsButtons { back };
     public enum SettingsButtons { back };
+    [SerializeField] GameObject _MainMenuContainer;
+    [SerializeField] GameObject _CreditsMenuContainer;
+    [SerializeField] GameObject _SettingsMenuContainer;
     [SerializeField] private string _sceneToLoadAfterClickingPlay;
     public void Awake()
     {
@@ -19,6 +22,10 @@ public class MainMenuManager : MonoBehaviour
             Debug.LogError("There are more than 1 MainMenuManger's in the scene.");
         }
     }
+    private void Start()
+    {
+        OpenMenu(_MainMenuContainer);
+    }
     public void MainMenuButtonClicked(MainMenuButtons buttonClicked)
     {
         DebugMessage("Button CLicked: " + buttonClicked.ToString());
@@ -28,8 +35,10 @@ public class MainMenuManager : MonoBehaviour
                 PlayClicked();
                 break;
             case MainMenuButtons.options:
+                OptionsClicked();
                 break;
             case MainMenuButtons.credits:
+                CreditsClicked();
                 break;
             case MainMenuButtons.quit:
                 QuitGame();
@@ -39,10 +48,35 @@ public class MainMenuManager : MonoBehaviour
                 break;
         }
     }
-
+    public void CreditsClicked()
+    {
+        OpenMenu(_CreditsMenuContainer);
+    }
+    public void OptionsClicked()
+    {
+        OpenMenu(_SettingsMenuContainer);
+    }
+    public void ReturnToMainMenu()
+    {
+        OpenMenu(_MainMenuContainer);
+    }
     public void CreditsButtonClicked(CreditsButtons buttonClicked)
     {
-        
+        switch(buttonClicked)
+        {
+            case CreditsButtons.back:
+                ReturnToMainMenu();
+                break;
+        }
+    }
+    public void SettingsButtonClicked(SettingsButtons buttonClicked)
+    {
+        switch (buttonClicked)
+        {
+            case SettingsButtons.back:
+                ReturnToMainMenu();
+                break;
+        }
     }
     private void DebugMessage(string message)
     {
@@ -62,5 +96,11 @@ public class MainMenuManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+    public void OpenMenu(GameObject menuToOpen)
+    {
+        _MainMenuContainer.SetActive(menuToOpen == _MainMenuContainer);
+        _CreditsMenuContainer.SetActive(menuToOpen == _CreditsMenuContainer);
+        _SettingsMenuContainer.SetActive(menuToOpen == _SettingsMenuContainer);
     }
 }

@@ -21,11 +21,17 @@ public class Enemy : MonoBehaviour
 
     public void StartMove()
     {
+        Vector2 oldTargetPosition = targetPosition;
         if (!stuck)
         {
             isMoving = true;
             if (rb == null) return;
             targetPosition = rb.position + Vector2.right * direction;
+            if(GameManager.instance.GetTile(targetPosition) == null)
+            {
+                return;
+            }
+            
         }
         else
         {
@@ -42,8 +48,27 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(rb.position, targetPosition) < 0.01f)
         {
             isMoving = false;
-            GameManager.instance.GetTile(gameObject);
+            GameManager.instance.GetTile(gameObject.transform.position);
         }
     }
 
+
+        void TileChoices(TileData tileInfo, GameObject entered)
+    {
+        if(tileInfo.tileName != "Normal")
+        {
+            if(tileInfo.tileName == "Fire")
+            {
+                tileInfo.FireTile(entered);
+            }
+            else if(tileInfo.tileName == "Earth")
+            {
+                tileInfo.EarthTile(entered);
+            }
+            else if(tileInfo.tileName == "Water")
+            {
+                tileInfo.WaterTile(entered);
+            }
+        }
+    }
 }
