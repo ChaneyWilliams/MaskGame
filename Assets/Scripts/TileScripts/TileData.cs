@@ -22,9 +22,8 @@ public class TileData : ScriptableObject
     {
         if (go.CompareTag("Player"))
         {
-            Player player = go.GetComponent<Player>();
-            player.isMoving = true;
-            player.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
+            Player.instance.animator.SetBool("isMoving", true);
+            Player.instance.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
         }
         else if (go.CompareTag("Enemy"))
         {

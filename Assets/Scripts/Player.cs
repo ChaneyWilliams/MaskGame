@@ -6,27 +6,29 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
     private Rigidbody2D rb;
     public PlayerState currentPlayerState;
     public float speed = 5.0f;
     public Vector3 targetPosition;
-    public bool isMoving = false;
+    public Animator animator;
 
     void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody2D>();
         targetPosition = transform.position;
     }
     void FixedUpdate()
     {
-        if(!isMoving) return;
+        if(!animator.GetBool("isMoving")) return;
 
         rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
 
         if (Vector3.Distance(rb.position, targetPosition) < 0.01f)
         {
             rb.position = targetPosition;
-            isMoving = false;
+            animator.SetBool("isMoving", false);
             GameManager.instance.GetTile(gameObject);
             GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
         }
@@ -36,19 +38,19 @@ public class Player : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn) return;
-        if (isMoving) return;
+        if (animator.GetBool("isMoving")) return;
 
         Vector2 input = context.ReadValue<Vector2>();
 
         if (Mathf.Abs(input.x) == 1f)
         {
             targetPosition = transform.position + new Vector3(input.x, 0f, 0f);
-            isMoving = true;
+            animator.SetBool("isMoving", true);
         }
         else if (Mathf.Abs(input.y) == 1f)
         {
             targetPosition = transform.position + new Vector3(0f, input.y, 0f);
-            isMoving = true;
+            animator.SetBool("isMoving", true);
         }
     }
 
@@ -63,7 +65,38 @@ public class Player : MonoBehaviour
             GameManager.instance.Paused();
         }
     }
-
+    public void ChangeToNormal(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.NormalState)
+        {
+            Debug.Log("Changing to Normal");
+            ChangePlayerState(PlayerState.NormalState);
+        }
+    }
+    public void ChangeToFire(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.FireState)
+        {
+            Debug.Log("Changing to Fire");
+            ChangePlayerState(PlayerState.FireState);
+        }
+    }
+    public void ChangeToEarth(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.EarthState)
+        {
+            Debug.Log("Changing to Earth");
+            ChangePlayerState(PlayerState.EarthState);
+        }
+    }
+    public void ChangeToWater(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.WaterState)
+        {
+            Debug.Log("Changing to Water");
+            ChangePlayerState(PlayerState.WaterState);
+        }
+    }
     public void ChangePlayerState(PlayerState newState)
     {
         currentPlayerState = newState;
@@ -80,6 +113,7 @@ public class Player : MonoBehaviour
             case PlayerState.WaterState:
                 break;
         }
+        GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
     }
 
     public enum PlayerState

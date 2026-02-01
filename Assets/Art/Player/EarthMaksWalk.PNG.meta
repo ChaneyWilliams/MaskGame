@@ -1,37 +1,28 @@
 fileFormatVersion: 2
-guid: 4237b9e3b960fc64b8c59bc4cd957720
+guid: a3b5c13def1fd724e930197f85561e4b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2600666036991416237
-    second: PlayerWalkSSHeet_0
+      213: -8960104018912493587
+    second: EarthMaksWalk_0
   - first:
-      213: 4485754712040416609
-    second: PlayerWalkSSHeet_1
+      213: -7847808675501603311
+    second: EarthMaksWalk_1
   - first:
-      213: 5664026603602443376
-    second: PlayerWalkSSHeet_2
+      213: -6492426995605167036
+    second: EarthMaksWalk_2
   - first:
-      213: 9073025906403756940
-    second: PlayerWalkSSHeet_3
+      213: -5963210695995022457
+    second: EarthMaksWalk_3
   - first:
-      213: -2419698482061749933
-    second: PlayerWalkSSHeet_4
+      213: -2037867435707753803
+    second: EarthMaksWalk_4
   - first:
-      213: -1046776894143454519
-    second: PlayerWalkSSHeet_5
+      213: -8271775685672622402
+    second: EarthMaksWalk_5
   - first:
-      213: -1617201769694376819
-    second: PlayerWalkSSHeet_6
-  - first:
-      213: 8122357845923356467
-    second: PlayerWalkSSHeet_7
-  - first:
-      213: 4552342620840724041
-    second: PlayerWalkSSHeet_8
-  - first:
-      213: -1528486843613150082
-    second: PlayerWalkSSHeet_9
+      213: -5938892923297964213
+    second: EarthMaksWalk_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -140,13 +131,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerWalkSSHeet_0
+      name: EarthMaksWalk_0
       rect:
         serializedVersion: 2
-        x: 98
-        y: 55
-        width: 512
-        height: 665
+        x: 106
+        y: 85
+        width: 533
+        height: 674
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 35824bda40498ebd0800000000000000
-      internalID: -2600666036991416237
+      spriteID: defbb221ed057a380800000000000000
+      internalID: -8960104018912493587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerWalkSSHeet_1
+      name: EarthMaksWalk_1
       rect:
         serializedVersion: 2
-        x: 418
-        y: 704
-        width: 18
-        height: 24
+        x: 200
+        y: 65
+        width: 110
+        height: 81
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,20 +168,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16524b0e42a904e30800000000000000
-      internalID: 4485754712040416609
+      spriteID: 1168f7fc69bf61390800000000000000
+      internalID: -7847808675501603311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerWalkSSHeet_2
+      name: EarthMaksWalk_2
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 65
+        width: 22
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4442cccbb0446e5a0800000000000000
+      internalID: -6492426995605167036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EarthMaksWalk_3
       rect:
         serializedVersion: 2
         x: 888
         y: 83
-        width: 506
-        height: 639
+        width: 536
+        height: 676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,80 +212,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07cf51acf2aaa9e40800000000000000
-      internalID: 5664026603602443376
+      spriteID: 7832868677b6e3da0800000000000000
+      internalID: -5963210695995022457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerWalkSSHeet_3
-      rect:
-        serializedVersion: 2
-        x: 1208
-        y: 702
-        width: 18
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c8bcc1dadfcd9ed70800000000000000
-      internalID: 9073025906403756940
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerWalkSSHeet_4
-      rect:
-        serializedVersion: 2
-        x: 1682
-        y: 85
-        width: 502
-        height: 637
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3515829fc018b6ed0800000000000000
-      internalID: -2419698482061749933
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerWalkSSHeet_5
-      rect:
-        serializedVersion: 2
-        x: 1990
-        y: 701
-        width: 20
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9c22e79f5f91971f0800000000000000
-      internalID: -1046776894143454519
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerWalkSSHeet_6
+      name: EarthMaksWalk_4
       rect:
         serializedVersion: 2
         x: 1028
@@ -287,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8ccb3b0f8b8e89e0800000000000000
-      internalID: -1617201769694376819
+      spriteID: 5ba9d434d5a08b3e0800000000000000
+      internalID: -2037867435707753803
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerWalkSSHeet_7
+      name: EarthMaksWalk_5
       rect:
         serializedVersion: 2
         x: 1144
@@ -309,20 +256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 33f5ed04d6968b070800000000000000
-      internalID: 8122357845923356467
+      spriteID: eb625c1f6dfb43d80800000000000000
+      internalID: -8271775685672622402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerWalkSSHeet_8
+      name: EarthMaksWalk_6
       rect:
         serializedVersion: 2
-        x: 1776
-        y: 65
-        width: 110
-        height: 81
+        x: 1674
+        y: 55
+        width: 539
+        height: 702
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,30 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 946051b8e7b2d2f30800000000000000
-      internalID: 4552342620840724041
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerWalkSSHeet_9
-      rect:
-        serializedVersion: 2
-        x: 1988
-        y: 65
-        width: 22
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e7484926059b9cae0800000000000000
-      internalID: -1528486843613150082
+      spriteID: b4f5eb31a50d49da0800000000000000
+      internalID: -5938892923297964213
       vertices: []
       indices: 
       edges: []
@@ -373,16 +298,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PlayerWalkSSHeet_0: -2600666036991416237
-      PlayerWalkSSHeet_1: 4485754712040416609
-      PlayerWalkSSHeet_2: 5664026603602443376
-      PlayerWalkSSHeet_3: 9073025906403756940
-      PlayerWalkSSHeet_4: -2419698482061749933
-      PlayerWalkSSHeet_5: -1046776894143454519
-      PlayerWalkSSHeet_6: -1617201769694376819
-      PlayerWalkSSHeet_7: 8122357845923356467
-      PlayerWalkSSHeet_8: 4552342620840724041
-      PlayerWalkSSHeet_9: -1528486843613150082
+      EarthMaksWalk_0: -8960104018912493587
+      EarthMaksWalk_1: -7847808675501603311
+      EarthMaksWalk_2: -6492426995605167036
+      EarthMaksWalk_3: -5963210695995022457
+      EarthMaksWalk_4: -2037867435707753803
+      EarthMaksWalk_5: -8271775685672622402
+      EarthMaksWalk_6: -5938892923297964213
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
