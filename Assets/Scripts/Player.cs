@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     public PlayerState currentPlayerState;
     public float speed = 5.0f;
     public Vector3 targetPosition;
-    public bool isMoving = false;
+    public Animator animator;
+    float direction = 1.0f;
 
     void Awake()
     {
@@ -21,14 +22,14 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(!isMoving) return;
+        if (!animator.GetBool("isMoving")) return;
 
         rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
 
         if (Vector3.Distance(rb.position, targetPosition) < 0.01f)
         {
             rb.position = targetPosition;
-            isMoving = false;
+            animator.SetBool("isMoving", false);
             GameManager.instance.GetTile(gameObject);
             GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
         }
@@ -38,19 +39,27 @@ public class Player : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn) return;
-        if (isMoving) return;
+        if (animator.GetBool("isMoving")) return;
 
         Vector2 input = context.ReadValue<Vector2>();
+        if (input.x > 0)
+        {
+            gameObject.transform.localScale = new Vector3(Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+        }
+        else if (input.x < 0)
+        {
+            gameObject.transform.localScale = new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+        }
 
         if (Mathf.Abs(input.x) == 1f)
         {
             targetPosition = transform.position + new Vector3(input.x, 0f, 0f);
-            isMoving = true;
+            animator.SetBool("isMoving", true);
         }
         else if (Mathf.Abs(input.y) == 1f)
         {
             targetPosition = transform.position + new Vector3(0f, input.y, 0f);
-            isMoving = true;
+            animator.SetBool("isMoving", true);
         }
     }
 
@@ -65,7 +74,38 @@ public class Player : MonoBehaviour
             GameManager.instance.Paused();
         }
     }
-
+    public void ChangeToNormal(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.NormalState)
+        {
+            Debug.Log("Changing to Normal");
+            ChangePlayerState(PlayerState.NormalState);
+        }
+    }
+    public void ChangeToFire(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.FireState)
+        {
+            Debug.Log("Changing to Fire");
+            ChangePlayerState(PlayerState.FireState);
+        }
+    }
+    public void ChangeToEarth(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.EarthState)
+        {
+            Debug.Log("Changing to Earth");
+            ChangePlayerState(PlayerState.EarthState);
+        }
+    }
+    public void ChangeToWater(InputAction.CallbackContext context)
+    {
+        if (currentPlayerState != PlayerState.WaterState)
+        {
+            Debug.Log("Changing to Water");
+            ChangePlayerState(PlayerState.WaterState);
+        }
+    }
     public void ChangePlayerState(PlayerState newState)
     {
         currentPlayerState = newState;
