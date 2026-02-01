@@ -94,6 +94,7 @@ public class TileData : ScriptableObject
             {
                 Player.instance.stuck = true;
             }
+            
         }
         else if (go.CompareTag("Enemy"))
         {
