@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JoshTest.unity
     guid: 498a5064612d0704fb181c6721bd6958
-  - enabled: 0
-    path: Assets/Scenes/HMMMMM.unity
-    guid: 69a96a800efe79247bc8f29e0f69d784
+  - enabled: 1
+    path: Assets/Scenes/Puzzles/Puzzle1.unity
+    guid: 10267a97e5bc06b48a9ac3699f0fd2f4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 05db1c5b70e3d88418f43cd1af535b5a, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

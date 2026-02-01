@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     public bool stuck = false;
     public bool gameOver = false;
+    
 
     void Awake()
     {

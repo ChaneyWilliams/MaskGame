@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    void Start()
+    {
+        map = GameObject.FindWithTag("Tileamap").GetComponent<Tilemap>();
+    }
     public void ChangeGameState(GameState newGameState)
     {
         StopAllCoroutines();
