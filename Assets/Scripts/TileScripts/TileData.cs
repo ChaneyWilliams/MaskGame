@@ -10,6 +10,14 @@ public class TileData : ScriptableObject
     public string tileName;
 
 
+
+    public void GoalTile(GameObject go)
+    {
+        GameManager.instance.WinScreen();
+        Player.instance.gameOver = true;
+    }
+
+
     public void FireTile(GameObject go)
     {
         if (go.CompareTag("Player"))

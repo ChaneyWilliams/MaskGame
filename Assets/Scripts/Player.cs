@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public Vector3 targetPosition;
     public Animator animator;
     public bool stuck = false;
+    public bool gameOver = false;
 
     void Awake()
     {
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
 
-        if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn || animator.GetBool("isMoving")) return;
+        if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn || animator.GetBool("isMoving") || gameOver) return;
         if (stuck)
         {
             GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
@@ -152,6 +153,10 @@ public class Player : MonoBehaviour
             else if(tileInfo.tileName == "Water")
             {
                 tileInfo.WaterTile(entered);
+            }
+            else if(tileInfo.tileName == "Goal")
+            {
+                tileInfo.GoalTile(entered);
             }
         }
     }

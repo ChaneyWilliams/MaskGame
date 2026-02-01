@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -9,10 +11,14 @@ using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
 {
+    public Animator animator;
+    public TMP_Text turnText;
     public static GameManager instance;
     public GameState currentGameState;
     public GameObject pauseMenuUI;
     public bool GameIsPaused = false;
+    string oldSceneName;
+    public GameObject winScreen;
     [SerializeField] private Tilemap map;
 
     [SerializeField] List<TileData> tileDatas;
@@ -21,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        
+
         if (instance == null)
         {
             instance = this;
@@ -39,34 +45,33 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-public void ChangeGameState(GameState newGameState)
-{
-    StopAllCoroutines();
-    StartCoroutine(ChangeGameStateRoutine(newGameState));
-}
-
-private IEnumerator ChangeGameStateRoutine(GameState newGameState)
-{
-    currentGameState = newGameState;
-    //Debug.Log(currentGameState);
-
-    switch (currentGameState)
+    public void ChangeGameState(GameState newGameState)
     {
-        case GameState.playerTurn:
-            yield break;
-
-        case GameState.enemyTurn:
-            yield return new WaitForSeconds(0.5f);
-
-            EnemyTurn();
-
-            yield return new WaitForSeconds(0.5f);
-
-            ChangeGameState(GameState.playerTurn);
-            break;
+        StopAllCoroutines();
+        StartCoroutine(ChangeGameStateRoutine(newGameState));
     }
-}
 
+    private IEnumerator ChangeGameStateRoutine(GameState newGameState)
+    {
+        currentGameState = newGameState;
+        //Debug.Log(currentGameState);
+
+        switch (currentGameState)
+        {
+            case GameState.playerTurn:
+                yield break;
+
+            case GameState.enemyTurn:
+                yield return new WaitForSeconds(0.5f);
+
+                turnText.text = "Monster Turn";
+                EnemyTurn();
+                yield return new WaitForSeconds(0.5f);
+                turnText.text = "Player Turn";
+                ChangeGameState(GameState.playerTurn);
+                break;
+        }
+    }
 
     public TileData GetTile(Vector3 entered)
     {
@@ -94,8 +99,53 @@ private IEnumerator ChangeGameStateRoutine(GameState newGameState)
 
 
     /// <summary>
-    /// PauseMenu Stuff
+    /// UI Stuff
     /// </summary>
+    /// 
+
+    IEnumerator LoadLevelName(string levelName)
+    {
+        //oldSceneName = SceneManager.GetActiveScene().name;
+        if (animator != null)
+        {
+            animator.SetTrigger("Start");
+            yield return new WaitForSeconds(1);
+        }
+        SceneManager.LoadScene(levelName);
+        animator.SetTrigger("End");
+    }
+    IEnumerator LoadLevelBuildIndex()
+    {
+        //oldSceneName = SceneManager.GetActiveScene().name;
+        if (animator != null)
+        {
+            animator.SetTrigger("Start");
+            yield return new WaitForSeconds(1);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        animator.SetTrigger("End");
+    }
+
+
+    public void WinScreen()
+    {
+        winScreen.SetActive(true);
+    }
+    public void NextPuzzle()
+    {
+        winScreen.SetActive(false);
+        StartCoroutine(LoadLevelBuildIndex());
+    }
+    public void LoadMainMenu()
+    {
+        winScreen.SetActive(false);
+        oldSceneName = SceneManager.GetActiveScene().name;
+        StartCoroutine(LoadLevelName("MainMenu"));
+    }
+    public void LoadLastScene()
+    {
+        StartCoroutine(LoadLevelName(oldSceneName));
+    }
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
