@@ -29,6 +29,7 @@ public class TileData : ScriptableObject
             }
             else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
             {
+                SoundEffectManager.Play("FireWhoosh");
                 return;
             }
             else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
@@ -59,6 +60,7 @@ public class TileData : ScriptableObject
             }
             else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
             {
+                SoundEffectManager.Play("WaterSplash");
                 return;
             }
             else
@@ -80,6 +82,7 @@ public class TileData : ScriptableObject
         {
             if (Player.instance.currentPlayerState == Player.PlayerState.FireState)
             {
+                SoundEffectManager.Play("PlantGrowth");
                 return;
             }
             else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
