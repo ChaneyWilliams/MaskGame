@@ -19,26 +19,6 @@ public class Enemy : MonoBehaviour
         EnemyManager.instance.enemies.Add(this);
     }
 
-    public void StartMove()
-    {
-        Vector2 oldTargetPosition = targetPosition;
-        if (!stuck)
-        {
-            isMoving = true;
-            if (rb == null) return;
-            targetPosition = rb.position + Vector2.right * direction;
-            if(GameManager.instance.GetTile(targetPosition) == null)
-            {
-                return;
-            }
-            
-        }
-        else
-        {
-            stuck = false;   
-        }
-    }
-
     void FixedUpdate()
     {
         if (!isMoving) return;
@@ -51,21 +31,53 @@ public class Enemy : MonoBehaviour
             GameManager.instance.GetTile(gameObject.transform.position);
         }
     }
-
-
-        void TileChoices(TileData tileInfo, GameObject entered)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if(tileInfo.tileName != "Normal")
+        if (other.CompareTag("Player"))
         {
-            if(tileInfo.tileName == "Fire")
+            UnityEngine.Debug.Log("GameOver");
+            Destroy(other.gameObject);
+        }
+    }
+
+    public void StartMove()
+    {
+        Vector2 oldTargetPosition = targetPosition;
+        if (!stuck)
+        {
+            Vector2 oldTargetPos = targetPosition;
+            isMoving = true;
+            if (rb == null) return;
+            targetPosition = rb.position + Vector2.right * direction;
+            if (GameManager.instance.GetTile(targetPosition) == null)
+            {
+                targetPosition = oldTargetPos;
+                gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+                direction = -direction;
+                return;
+            }
+
+        }
+        else
+        {
+            stuck = false;
+        }
+    }
+
+
+    void TileChoices(TileData tileInfo, GameObject entered)
+    {
+        if (tileInfo.tileName != "Normal")
+        {
+            if (tileInfo.tileName == "Fire")
             {
                 tileInfo.FireTile(entered);
             }
-            else if(tileInfo.tileName == "Earth")
+            else if (tileInfo.tileName == "Earth")
             {
                 tileInfo.EarthTile(entered);
             }
-            else if(tileInfo.tileName == "Water")
+            else if (tileInfo.tileName == "Water")
             {
                 tileInfo.WaterTile(entered);
             }
