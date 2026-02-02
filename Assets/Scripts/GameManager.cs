@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
     public void LoadMainMenu()
     {
         SoundEffectManager.Play("ButtonClick");
+        totalWinScreen.SetActive(false);
         winScreen.SetActive(false);
         oldSceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(LoadLevelName("MainMenu"));
