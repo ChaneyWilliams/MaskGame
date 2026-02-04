@@ -25,7 +25,7 @@ public class SoundEffectLibrary : MonoBehaviour
     {
         if (soundDictionary.ContainsKey(name))
         {
-            UnityEngine.Debug.Log("GetRandomClip");
+            //UnityEngine.Debug.Log("GetRandomClip");
             
             List<AudioClip> audioClips = soundDictionary[name];
             if (audioClips.Count > 0)

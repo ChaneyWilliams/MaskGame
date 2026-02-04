@@ -14,7 +14,6 @@ public class SoundEffectManager : MonoBehaviour
             Instance = this;
             audioSource = GetComponent<AudioSource>();
             library = GetComponent<SoundEffectLibrary>();
-            if (library == null) UnityEngine.Debug.Log("UHH");
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
@@ -26,7 +25,7 @@ public class SoundEffectManager : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClip);
         }
-        else { Debug.Log("null"); }
+        //else { Debug.Log("null"); }
     }
 
     public static void SetVolume(float volume)

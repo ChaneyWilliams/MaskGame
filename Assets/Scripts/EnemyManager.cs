@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach(Enemy enemy in enemies)
         {
-            UnityEngine.Debug.Log("moving enemies");
+            //UnityEngine.Debug.Log("moving enemies");
             enemy.StartMove();
         }
     }

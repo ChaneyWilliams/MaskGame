@@ -29,14 +29,14 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(rb.position, targetPosition) < 0.01f)
         {
             isMoving = false;
-            GameManager.instance.GetTile(gameObject.transform.position);
+            TileData currentTile = GameManager.instance.GetTile(gameObject.transform.position);
+            TileChoices(currentTile, gameObject);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            UnityEngine.Debug.Log("GameOver");
             Destroy(other.gameObject);
         }
     }
@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
             Vector2 oldTargetPos = targetPosition;
             isMoving = true;
             if (rb == null) return;
+            //toggles up and down or left to right
             if (vertical)
             {
                 targetPosition = rb.position + Vector2.up * direction;
@@ -56,6 +57,7 @@ public class Enemy : MonoBehaviour
             {
                 targetPosition = rb.position + Vector2.right * direction;
             }
+            
             if (GameManager.instance.GetTile(targetPosition) == null)
             {
                 targetPosition = oldTargetPos;

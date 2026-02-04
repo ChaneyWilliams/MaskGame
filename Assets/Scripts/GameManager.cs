@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 {
     public Animator animator;
     public TMP_Text turnText;
+    int turnCounter = 1;
     public static GameManager instance;
     public GameState currentGameState;
     public GameObject pauseMenuUI;
@@ -49,13 +50,28 @@ public class GameManager : MonoBehaviour
                 yield break;
 
             case GameState.enemyTurn:
-                yield return new WaitForSeconds(timeBetweenTurns);
 
-                turnText.text = "Monster Turn";
-                EnemyTurn();
                 yield return new WaitForSeconds(timeBetweenTurns);
-                turnText.text = "Player Turn";
+                turnText.text = "Monster Turn: " + turnCounter.ToString();
+
+                EnemyTurn();
+
+                yield return new WaitForSeconds(timeBetweenTurns);
+                ChangeGameState(GameState.environmentTurn);
+
+                break;
+            case GameState.environmentTurn:
+
+                yield return new WaitForSeconds(timeBetweenTurns);
+                turnText.text = "Environment Turn: " + turnCounter.ToString();
+
+                EnvironmentTurn();
+                
+                yield return new WaitForSeconds(timeBetweenTurns);
+                turnCounter++;
+                turnText.text = "Player Turn: " + turnCounter.ToString() ;
                 ChangeGameState(GameState.playerTurn);
+
                 break;
         }
     }
@@ -63,7 +79,8 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         playerTurn = 0,
-        enemyTurn = 1
+        enemyTurn = 1,
+        environmentTurn = 2
     }
     public TileData GetTile(Vector3 entered)
     {
@@ -73,6 +90,10 @@ public class GameManager : MonoBehaviour
     void EnemyTurn()
     {
         EnemyManager.instance.TakeTurn();
+    }
+    void EnvironmentTurn()
+    {
+        MapManager.instance.TakeTurn();
     }
 
 
@@ -97,6 +118,7 @@ public class GameManager : MonoBehaviour
         }
         SceneManager.LoadScene(levelName);
         animator.SetTrigger("FadeIn");
+        turnCounter = 1;
     }
     IEnumerator LoadLevelBuildIndex()
     {
@@ -108,6 +130,7 @@ public class GameManager : MonoBehaviour
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         animator.SetTrigger("FadeIn");
+        turnCounter = 1;
     }
 
     public void ResetLevel()

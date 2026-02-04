@@ -48,6 +48,11 @@ MonoBehaviour:
   tileDatas:
   - {fileID: 11400000, guid: fabdd23371b5fd54595e28ad9ff22a2c, type: 2}
   - {fileID: 11400000, guid: 0dc0d30452bca9c49942e60989149a8f, type: 2}
-  - {fileID: 11400000, guid: 9c3679784121cd143966ca2945dd7e9a, type: 2}
-  - {fileID: 11400000, guid: 246aaac351aa4404b9366e7534b71799, type: 2}
   - {fileID: 11400000, guid: 81f14bd53a421cc4abe5db3e0e3af7b6, type: 2}
+  - {fileID: 11400000, guid: 246aaac351aa4404b9366e7534b71799, type: 2}
+  - {fileID: 11400000, guid: 9c3679784121cd143966ca2945dd7e9a, type: 2}
+  allTiles:
+  - {fileID: 11400000, guid: 53d0b4b56115705438cf866ec52f486f, type: 2}
+  - {fileID: 11400000, guid: 7903499ac3ab0dc44a9a94972ed22e44, type: 2}
+  - {fileID: 11400000, guid: aaf700a11ded1e547b7b76b9789e6729, type: 2}
+  - {fileID: 11400000, guid: 10640b9f42b47ca4f9de66672330efc5, type: 2}
