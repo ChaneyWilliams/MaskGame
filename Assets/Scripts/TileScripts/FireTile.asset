@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tiles:
   - {fileID: 11400000, guid: 7903499ac3ab0dc44a9a94972ed22e44, type: 2}
-  tileName: Fire
+  tileState: 2

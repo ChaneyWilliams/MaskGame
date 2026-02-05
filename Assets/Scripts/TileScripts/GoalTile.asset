@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   tiles:
   - {fileID: 11400000, guid: f6ef136b14a309b409c372a548a85779, type: 2}
-  tileName: Goal
+  tileState: 4

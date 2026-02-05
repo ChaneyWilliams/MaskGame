@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d7ff217f6b80f4d87915b94e130921, type: 3}
   m_Name: WalllTile
   m_EditorClassIdentifier: Assembly-CSharp::TileData
-  tiles: []
-  tileState: 0
+  tiles:
+  - {fileID: 11400000, guid: aa16b2b0d1932e74b8afc93ab0670d5d, type: 2}
+  - {fileID: 11400000, guid: d940790bf52db5647b3359ec6e0fdf27, type: 2}
+  tileState: 5
