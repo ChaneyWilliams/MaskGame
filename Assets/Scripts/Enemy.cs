@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         {
             isMoving = false;
             TileData currentTile = GameManager.instance.GetTile(gameObject.transform.position);
-            TileChoices(currentTile, gameObject);
+            MapManager.instance.TileChoices(currentTile, gameObject);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -70,26 +70,6 @@ public class Enemy : MonoBehaviour
         else
         {
             stuck = false;
-        }
-    }
-
-
-    void TileChoices(TileData tileInfo, GameObject entered)
-    {
-        if (tileInfo.tileName != "Normal")
-        {
-            if (tileInfo.tileName == "Fire")
-            {
-                tileInfo.FireTile(entered);
-            }
-            else if (tileInfo.tileName == "Earth")
-            {
-                tileInfo.EarthTile(entered);
-            }
-            else if (tileInfo.tileName == "Water")
-            {
-                tileInfo.WaterTile(entered);
-            }
         }
     }
 }

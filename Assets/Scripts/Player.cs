@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 using Debug = UnityEngine.Debug;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -10,31 +11,33 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     public PlayerState currentPlayerState;
     public float speed = 5.0f;
-    public Vector3 targetPosition;
+    public Vector3 moveTargetPos;
     public Animator animator;
     public bool stuck = false;
     public bool gameOver = false;
-    
+    TileBase currentTile;
+    Vector3 pickUpPos;
+
 
     void Awake()
     {
         instance = this;
         rb = GetComponent<Rigidbody2D>();
-        targetPosition = transform.position;
+        moveTargetPos = transform.position;
     }
     void FixedUpdate()
     {
         if (!animator.GetBool("isMoving")) return;
         //SoundEffectManager.Play("Gravel_Footsteps"); NOT HERE calls like 70 times
-        rb.MovePosition(Vector3.MoveTowards(rb.position, targetPosition, speed * Time.fixedDeltaTime));
+        rb.MovePosition(Vector3.MoveTowards(rb.position, moveTargetPos, speed * Time.fixedDeltaTime));
 
-        if (Vector3.Distance(rb.position, targetPosition) < 0.01f)
+        if (Vector3.Distance(rb.position, moveTargetPos) < 0.01f)
         {
-            rb.position = targetPosition;
+            rb.position = moveTargetPos;
             animator.SetBool("isMoving", false);
             TileData currentTile = GameManager.instance.GetTile(gameObject.transform.position);
-            TileChoices(currentTile, gameObject);
-            GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
+            MapManager.instance.TileChoices(currentTile, gameObject);
+            GameManager.instance.ChangeGameState(GameManager.GameState.EnemyTurn);
         }
     }
 
@@ -42,41 +45,85 @@ public class Player : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
 
-        if (GameManager.instance.currentGameState == GameManager.GameState.enemyTurn || animator.GetBool("isMoving") || gameOver) return;
+        if (GameManager.instance.currentGameState == GameManager.GameState.EnemyTurn || animator.GetBool("isMoving") || gameOver) return;
         if (stuck)
         {
-            GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
+            GameManager.instance.ChangeGameState(GameManager.GameState.EnemyTurn);
             stuck = false;
             return;
         }
         SoundEffectManager.Play("Gravel_Footsteps");
-        Vector3 oldTargetPosition = targetPosition;
+        Vector3 oldTargetPosition = moveTargetPos;
         Vector2 input = context.ReadValue<Vector2>();
 
         if (Mathf.Abs(input.x) == 1f)
         {
-            targetPosition = transform.position + new Vector3(input.x, 0f, 0f);
-            if (GameManager.instance.GetTile(targetPosition) == null)
+            moveTargetPos = transform.position + new Vector3(input.x, 0f, 0f);
+            pickUpPos = moveTargetPos + new Vector3(input.x, 0f, 0f);
+            if (GameManager.instance.GetTile(moveTargetPos) == null || GameManager.instance.GetTile(moveTargetPos).tileState == TileData.TileState.WallTile)
             {
-                targetPosition = oldTargetPosition;
+                moveTargetPos = oldTargetPosition;
+                pickUpPos = moveTargetPos + new Vector3(0f, input.y, 0f);
                 return;
             }
             animator.SetBool("isMoving", true);
-            gameObject.transform.localScale = (input.x < 0) ? 
-            new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z): 
+            gameObject.transform.localScale = (input.x < 0) ?
+            new Vector3(-Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z) :
             new Vector3(Mathf.Abs(gameObject.transform.localScale.x), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
         }
         else if (Mathf.Abs(input.y) == 1f)
         {
-            targetPosition = transform.position + new Vector3(0f, input.y, 0f);
-            if (GameManager.instance.GetTile(targetPosition) == null)
+            moveTargetPos = transform.position + new Vector3(0f, input.y, 0f);
+            pickUpPos = moveTargetPos + new Vector3(0f, input.y, 0f);
+            if (GameManager.instance.GetTile(moveTargetPos) == null || GameManager.instance.GetTile(moveTargetPos).tileState == TileData.TileState.WallTile)
             {
-                targetPosition = oldTargetPosition;
+                moveTargetPos = oldTargetPosition;
+                pickUpPos = moveTargetPos + new Vector3(0f, input.y, 0f);
                 return;
             }
             animator.SetBool("isMoving", true);
         }
     }
+    public void PickUpTile(InputAction.CallbackContext context)
+    {
+        TileData tile = GameManager.instance.GetTile(pickUpPos);
+        if (currentTile == null)
+        {
+            if (tile == null) return;
+            switch (tile.tileState)
+            {
+                case TileData.TileState.EarthTile:
+                    currentTile = MapManager.instance.GetTileBase(0);
+                    break;
+
+                case TileData.TileState.FireTile:
+                    currentTile = MapManager.instance.GetTileBase(1);
+                    break;
+
+                case TileData.TileState.WaterTile:
+                    currentTile = MapManager.instance.GetTileBase(2);
+                    break;
+
+                case TileData.TileState.NormalTile:
+                    currentTile = MapManager.instance.GetTileBase(3);
+                    break;
+
+                default:
+                    return;
+            }
+
+            MapManager.instance.map.SetTile(Vector3Int.FloorToInt(pickUpPos), null);
+        }
+        else
+        {
+            if (tile == null || tile.tileState != TileData.TileState.WallTile)
+            {
+                MapManager.instance.map.SetTile(Vector3Int.FloorToInt(pickUpPos), currentTile);
+                currentTile = null;
+            }
+        }
+    }
+
 
     public void PauseGame(InputAction.CallbackContext context)
     {
@@ -145,29 +192,7 @@ public class Player : MonoBehaviour
             case PlayerState.WaterState:
                 break;
         }
-        GameManager.instance.ChangeGameState(GameManager.GameState.enemyTurn);
-    }
-    void TileChoices(TileData tileInfo, GameObject entered)
-    {
-        if(tileInfo.tileName != "Normal")
-        {
-            if(tileInfo.tileName == "Fire")
-            {
-                tileInfo.FireTile(entered);
-            }
-            else if(tileInfo.tileName == "Earth")
-            {
-                tileInfo.EarthTile(entered);
-            }
-            else if(tileInfo.tileName == "Water")
-            {
-                tileInfo.WaterTile(entered);
-            }
-            else if(tileInfo.tileName == "Goal")
-            {
-                tileInfo.GoalTile(entered);
-            }
-        }
+        GameManager.instance.ChangeGameState(GameManager.GameState.EnemyTurn);
     }
 
     public enum PlayerState

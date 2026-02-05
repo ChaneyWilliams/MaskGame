@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class TileData : ScriptableObject
 {
     public TileBase[] tiles;
-    public string tileName;
+    public TileState tileState;
 
 
 
@@ -28,53 +28,56 @@ public class TileData : ScriptableObject
 
     public void FireTile(GameObject go)
     {
-        if (go.CompareTag("Player"))
+        if (!go.CompareTag("Player"))
+            return;
+
+        switch (Player.instance.currentPlayerState)
         {
-            if (Player.instance.currentPlayerState == Player.PlayerState.FireState)
-            {
+            case Player.PlayerState.FireState:
                 Player.instance.animator.SetBool("isMoving", true);
-                Player.instance.targetPosition = go.transform.position + new Vector3(-2.0f, 0.0f, 0f);
-            }
-            else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
-            {
+                Player.instance.moveTargetPos = go.transform.position + new Vector3(-2.0f, 0.0f, 0f);
+                break;
+
+            case Player.PlayerState.WaterState:
                 SoundEffectManager.Play("FireWhoosh");
                 return;
-            }
-            else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
-            {
-                Destroy(go);
-            }
-            else
-            {
-                Player.instance.stuck = true;
-            }
-            SoundEffectManager.Play("FireWhoosh");
 
+            case Player.PlayerState.EarthState:
+                Destroy(go);
+                break;
+
+            default:
+                Player.instance.stuck = true;
+                break;
         }
+
+        SoundEffectManager.Play("FireWhoosh");
     }
+
     public void WaterTile(GameObject go)
     {
         if (go.CompareTag("Player"))
         {
-            if (Player.instance.currentPlayerState == Player.PlayerState.FireState)
+            switch (Player.instance.currentPlayerState)
             {
-                Destroy(go);
-            }
-            else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
-            {
-                Player.instance.animator.SetBool("isMoving", true);
-                Player.instance.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
+                case Player.PlayerState.FireState:
+                    Destroy(go);
+                    break;
 
+                case Player.PlayerState.WaterState:
+                    Player.instance.animator.SetBool("isMoving", true);
+                    Player.instance.moveTargetPos = go.transform.position + new Vector3(0f, -1.0f, 0f);
+                    break;
+
+                case Player.PlayerState.EarthState:
+                    SoundEffectManager.Play("WaterSplash");
+                    return;
+
+                default:
+                    Player.instance.stuck = true;
+                    break;
             }
-            else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
-            {
-                SoundEffectManager.Play("WaterSplash");
-                return;
-            }
-            else
-            {
-                Player.instance.stuck = true;
-            }
+
             SoundEffectManager.Play("WaterSplash");
         }
         else if (go.CompareTag("Enemy"))
@@ -84,31 +87,32 @@ public class TileData : ScriptableObject
             enemy.targetPosition = go.transform.position + new Vector3(0f, -1.0f, 0f);
         }
     }
+
     public void EarthTile(GameObject go)
     {
         if (go.CompareTag("Player"))
         {
-            if (Player.instance.currentPlayerState == Player.PlayerState.FireState)
+            switch (Player.instance.currentPlayerState)
             {
-                SoundEffectManager.Play("PlantGrowth");
-                return;
-            }
-            else if (Player.instance.currentPlayerState == Player.PlayerState.WaterState)
-            {
-                Destroy(go);
+                case Player.PlayerState.FireState:
+                    SoundEffectManager.Play("PlantGrowth");
+                    return;
 
+                case Player.PlayerState.WaterState:
+                    Destroy(go);
+                    break;
+
+                case Player.PlayerState.EarthState:
+                    Player.instance.animator.SetBool("isMoving", true);
+                    Player.instance.moveTargetPos = go.transform.position + new Vector3(0f, 1.0f, 0f);
+                    break;
+
+                default:
+                    Player.instance.stuck = true;
+                    break;
             }
-            else if (Player.instance.currentPlayerState == Player.PlayerState.EarthState)
-            {
-                Player.instance.animator.SetBool("isMoving", true);
-                Player.instance.targetPosition = go.transform.position + new Vector3(0f, 1.0f, 0f);
-            }
-            else
-            {
-                Player.instance.stuck = true;
-            }
+
             SoundEffectManager.Play("PlantGrowth");
-
         }
         else if (go.CompareTag("Enemy"))
         {
@@ -116,5 +120,18 @@ public class TileData : ScriptableObject
             enemy.stuck = true;
         }
     }
+
+
+    public enum TileState
+    {
+        NormalTile = 0,
+        EarthTile = 1,
+        FireTile = 2,
+        WaterTile = 3,
+        GoalTile = 4,
+        WallTile = 5
+
+    }
+
 
 }

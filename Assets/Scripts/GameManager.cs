@@ -46,10 +46,10 @@ public class GameManager : MonoBehaviour
 
         switch (currentGameState)
         {
-            case GameState.playerTurn:
+            case GameState.PlayerTurn:
                 yield break;
 
-            case GameState.enemyTurn:
+            case GameState.EnemyTurn:
 
                 yield return new WaitForSeconds(timeBetweenTurns);
                 turnText.text = "Monster Turn: " + turnCounter.ToString();
@@ -57,10 +57,10 @@ public class GameManager : MonoBehaviour
                 EnemyTurn();
 
                 yield return new WaitForSeconds(timeBetweenTurns);
-                ChangeGameState(GameState.environmentTurn);
+                ChangeGameState(GameState.EnvironTurn);
 
                 break;
-            case GameState.environmentTurn:
+            case GameState.EnvironTurn:
 
                 yield return new WaitForSeconds(timeBetweenTurns);
                 turnText.text = "Environment Turn: " + turnCounter.ToString();
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSeconds(timeBetweenTurns);
                 turnCounter++;
                 turnText.text = "Player Turn: " + turnCounter.ToString() ;
-                ChangeGameState(GameState.playerTurn);
+                ChangeGameState(GameState.PlayerTurn);
 
                 break;
         }
@@ -78,9 +78,9 @@ public class GameManager : MonoBehaviour
 
     public enum GameState
     {
-        playerTurn = 0,
-        enemyTurn = 1,
-        environmentTurn = 2
+        PlayerTurn = 0,
+        EnemyTurn = 1,
+        EnvironTurn = 2
     }
     public TileData GetTile(Vector3 entered)
     {

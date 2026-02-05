@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 81f14bd53a421cc4abe5db3e0e3af7b6, type: 2}
   - {fileID: 11400000, guid: 246aaac351aa4404b9366e7534b71799, type: 2}
   - {fileID: 11400000, guid: 9c3679784121cd143966ca2945dd7e9a, type: 2}
+  - {fileID: 11400000, guid: 8f2c82f07df53c540812548c9265fc40, type: 2}
   allTiles:
   - {fileID: 11400000, guid: 53d0b4b56115705438cf866ec52f486f, type: 2}
   - {fileID: 11400000, guid: 7903499ac3ab0dc44a9a94972ed22e44, type: 2}

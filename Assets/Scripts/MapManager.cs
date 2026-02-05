@@ -6,9 +6,9 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager instance;
 
-    [SerializeField] private Tilemap map;
+    public Tilemap map;
     [SerializeField] private List<TileData> tileDatas;
-    [SerializeField] private List<TileBase> allTiles;
+    public List<TileBase> allTiles;
 
     private Dictionary<TileBase, TileData> dataFromTile;
     private List<Vector3Int> specialTiles = new List<Vector3Int>();
@@ -47,6 +47,16 @@ public class MapManager : MonoBehaviour
         }
     }
 
+
+
+    // -------------------------------
+    // Tile lookup helpers
+    // -------------------------------
+    public TileBase GetTileBase(int tileIndex)
+    {
+        return allTiles[tileIndex];
+    }
+
     public TileData GetTileFromMap(Vector3 position)
     {
         Vector3Int gridPosition = map.WorldToCell(position);
@@ -55,23 +65,34 @@ public class MapManager : MonoBehaviour
 
         if (tile == null) return null;
         return dataFromTile[tile];
-        //Debug.Log(tileInfo.tileName);
     }
 
-    // -------------------------------
-    // Tile lookup helpers
-    // -------------------------------
-
-    public TileData GetTileFromCell(Vector3 position)
+    public void TileChoices(TileData tileInfo, GameObject entered)
     {
-        Vector3Int gridPosition = map.WorldToCell(position);
+        switch (tileInfo.tileState)
+        {
+            case TileData.TileState.FireTile:
+                tileInfo.FireTile(entered);
+                break;
 
-        TileBase tile = map.GetTile(gridPosition);
+            case TileData.TileState.EarthTile:
+                tileInfo.EarthTile(entered);
+                break;
 
-        if (tile == null) return null;
-        return dataFromTile[tile];
-        //Debug.Log(tileInfo.tileName);
+            case TileData.TileState.WaterTile:
+                tileInfo.WaterTile(entered);
+                break;
+
+            case TileData.TileState.GoalTile:
+                tileInfo.GoalTile(entered);
+                break;
+
+            case TileData.TileState.NormalTile:
+            default:
+                break;
+        }
     }
+
 
     // -------------------------------
     // Turn logic
@@ -84,8 +105,8 @@ public class MapManager : MonoBehaviour
 
         foreach (Vector3Int pos in bounds.allPositionsWithin)
         {
-            TileData tile = GetTileFromCell(pos);
-            if (tile == null || tile.tileName == "Normal")
+            TileData tile = GetTileFromMap(pos);
+            if (tile == null || tile.tileState == TileData.TileState.NormalTile || tile.tileState == TileData.TileState.WallTile)
                 continue;
 
             specialTiles.Add(pos);
@@ -95,14 +116,15 @@ public class MapManager : MonoBehaviour
 
         foreach (Vector3Int tile in specialTiles)
         {
+
             var changes = TileCheck(tile);
+
             foreach (var kvp in changes)
             {
-                allChanges[kvp.Key] = kvp.Value; // Merge all changes
+                allChanges[kvp.Key] = kvp.Value;
             }
         }
 
-        // Apply all changes at once
         foreach (var kvp in allChanges)
         {
             map.SetTile(kvp.Key, kvp.Value);
@@ -111,29 +133,32 @@ public class MapManager : MonoBehaviour
 
     Dictionary<Vector3Int, TileBase> TileCheck(Vector3Int position)
     {
+
         Dictionary<Vector3Int, TileBase> changes = new Dictionary<Vector3Int, TileBase>();
-        TileData currentTile = GetTileFromCell(position);
+        TileData currentTile = GetTileFromMap(position);
         if (currentTile == null)
             return changes;
 
         foreach (Vector3Int nextPos in GetNeighbors(position))
         {
-            TileData neighborTile = GetTileFromCell(nextPos);
+            TileData neighborTile = GetTileFromMap(nextPos);
             if (neighborTile == null)
                 continue;
+            switch ((currentTile.tileState, neighborTile.tileState))
+            {
+                case (TileData.TileState.EarthTile, TileData.TileState.WaterTile):
+                    changes[nextPos] = allTiles[0];
+                    break;
 
-            if (currentTile.tileName == "Earth" && neighborTile.tileName == "Water")
-            {
-                changes[nextPos] = allTiles[0]; // Water -> something
+                case (TileData.TileState.FireTile, TileData.TileState.EarthTile):
+                    changes[nextPos] = allTiles[1];
+                    break;
+
+                case (TileData.TileState.WaterTile, TileData.TileState.FireTile):
+                    changes[nextPos] = allTiles[2];
+                    break;
             }
-            else if (currentTile.tileName == "Fire" && neighborTile.tileName == "Earth")
-            {
-                changes[nextPos] = allTiles[1]; // Earth -> something
-            }
-            else if (currentTile.tileName == "Water" && neighborTile.tileName == "Fire")
-            {
-                changes[nextPos] = allTiles[2]; // Fire -> something
-            }
+
         }
 
         return changes;
