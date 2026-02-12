@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public bool stuck = false;
     public bool gameOver = false;
     TileBase currentTile;
-    Vector3 pickUpPos;
+    public Vector3 pickUpPos;
 
 
     void Awake()
@@ -24,9 +24,15 @@ public class Player : MonoBehaviour
         instance = this;
         rb = GetComponent<Rigidbody2D>();
         moveTargetPos = transform.position;
+        pickUpPos = gameObject.transform.position + Vector3.right;
+
     }
     void FixedUpdate()
     {
+        float alpha = (Mathf.Sin(Time.time * 2.0f) + 1f) / 2f;
+        Color color = new Color(1.0f, 1.0f, 1.0f, alpha);
+        MapManager.instance.SetTileColor(pickUpPos, color);
+
         if (!animator.GetBool("isMoving")) return;
         //SoundEffectManager.Play("Gravel_Footsteps"); NOT HERE calls like 70 times
         rb.MovePosition(Vector3.MoveTowards(rb.position, moveTargetPos, speed * Time.fixedDeltaTime));
@@ -55,7 +61,7 @@ public class Player : MonoBehaviour
         SoundEffectManager.Play("Gravel_Footsteps");
         Vector3 oldTargetPosition = moveTargetPos;
         Vector2 input = context.ReadValue<Vector2>();
-
+        MapManager.instance.SetTileColor(pickUpPos, new Color(1.0f, 1.0f, 1.0f, 1.0f));
         if (Mathf.Abs(input.x) == 1f)
         {
             moveTargetPos = transform.position + new Vector3(input.x, 0f, 0f);
@@ -118,6 +124,7 @@ public class Player : MonoBehaviour
         {
             if (tile == null || tile.tileState != TileData.TileState.WallTile)
             {
+                Debug.Log(pickUpPos);
                 MapManager.instance.map.SetTile(Vector3Int.FloorToInt(pickUpPos), currentTile);
                 currentTile = null;
             }

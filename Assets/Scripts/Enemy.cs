@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
                 targetPosition = rb.position + Vector2.right * direction;
             }
             
-            if (GameManager.instance.GetTile(targetPosition) == null)
+            if (GameManager.instance.GetTile(targetPosition) == null || GameManager.instance.GetTile(targetPosition).tileState == TileData.TileState.WallTile)
             {
                 targetPosition = oldTargetPos;
                 gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z);

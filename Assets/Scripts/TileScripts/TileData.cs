@@ -28,27 +28,34 @@ public class TileData : ScriptableObject
 
     public void FireTile(GameObject go)
     {
-        if (!go.CompareTag("Player"))
-            return;
-
-        switch (Player.instance.currentPlayerState)
+        if (go.CompareTag("Player"))
         {
-            case Player.PlayerState.FireState:
-                Player.instance.animator.SetBool("isMoving", true);
-                Player.instance.moveTargetPos = go.transform.position + new Vector3(-2.0f, 0.0f, 0f);
-                break;
 
-            case Player.PlayerState.WaterState:
-                SoundEffectManager.Play("FireWhoosh");
-                return;
+            switch (Player.instance.currentPlayerState)
+            {
+                case Player.PlayerState.FireState:
+                    Player.instance.animator.SetBool("isMoving", true);
+                    Player.instance.moveTargetPos = go.transform.position + new Vector3(-2.0f, 0.0f, 0f);
+                    break;
 
-            case Player.PlayerState.EarthState:
-                Destroy(go);
-                break;
+                case Player.PlayerState.WaterState:
+                    SoundEffectManager.Play("FireWhoosh");
+                    return;
 
-            default:
-                Player.instance.stuck = true;
-                break;
+                case Player.PlayerState.EarthState:
+                    Destroy(go);
+                    break;
+
+                default:
+                    Player.instance.stuck = true;
+                    break;
+            }
+        }
+        else
+        {
+            Enemy enemy = go.GetComponent<Enemy>();
+            enemy.isMoving = true;
+            enemy.targetPosition = go.transform.position + new Vector3(2.0f, 0.0f, 0f);
         }
 
         SoundEffectManager.Play("FireWhoosh");

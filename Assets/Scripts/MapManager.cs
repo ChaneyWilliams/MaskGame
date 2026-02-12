@@ -66,6 +66,14 @@ public class MapManager : MonoBehaviour
         if (tile == null) return null;
         return dataFromTile[tile];
     }
+    public void SetTileColor(Vector3 position, Color color)
+    {
+        //UnityEngine.Debug.Log("Im being called");
+        Vector3Int gridPosition = map.WorldToCell(position);
+
+        TileBase tile = map.GetTile(gridPosition);
+        map.SetColor(gridPosition, color);
+    }
 
     public void TileChoices(TileData tileInfo, GameObject entered)
     {
@@ -114,24 +122,24 @@ public class MapManager : MonoBehaviour
 
         Dictionary<Vector3Int, TileBase> allChanges = new Dictionary<Vector3Int, TileBase>();
 
-        foreach (Vector3Int tile in specialTiles)
+        foreach (Vector3Int tile in specialTiles) //loop through all special tiles
         {
+            //make a dict that has all the nighbors with the right tile type
+            //(if fire tile get earth neighbors, if earth tile get water neighbors, etc..)
+            Dictionary<Vector3Int, TileBase> changes = CheckAllNeighbors(tile); 
 
-            var changes = TileCheck(tile);
-
-            foreach (var kvp in changes)
+            foreach (KeyValuePair<Vector3Int, TileBase> kvp in changes)
             {
-                allChanges[kvp.Key] = kvp.Value;
+                allChanges[kvp.Key] = kvp.Value; // pull all those tiles into a dict outside the loop
             }
         }
-
-        foreach (var kvp in allChanges)
+        foreach (KeyValuePair<Vector3Int, TileBase> kvp in allChanges)
         {
-            map.SetTile(kvp.Key, kvp.Value);
+            map.SetTile(kvp.Key, kvp.Value); // loop through outside dict to place new tiles without chaining new tiles (new fire tiles wont burn earth tiles etc)
         }
     }
 
-    Dictionary<Vector3Int, TileBase> TileCheck(Vector3Int position)
+    Dictionary<Vector3Int, TileBase> CheckAllNeighbors(Vector3Int position)
     {
 
         Dictionary<Vector3Int, TileBase> changes = new Dictionary<Vector3Int, TileBase>();
@@ -141,6 +149,7 @@ public class MapManager : MonoBehaviour
 
         foreach (Vector3Int nextPos in GetNeighbors(position))
         {
+            //chunky switch boi 
             TileData neighborTile = GetTileFromMap(nextPos);
             if (neighborTile == null)
                 continue;
